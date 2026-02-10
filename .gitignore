@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+markets/*/resolve_bundle.json
+tests/round2/
+tests/mainnet_test_state.json
+tests/submit_body.json

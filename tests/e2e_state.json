@@ -1,0 +1,17 @@
+{
+  "market_id": "8ca4f9107bd6601bd148ceee599b8128aec66bbb5a36358f2dd75833550370de",
+  "oracle_pubkey": "873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617",
+  "oracle_fingerprint": 1631380421,
+  "oracle_name": "DracattusDev",
+  "yes_asset_id": "b5d1c85264be37f99be66ce96f1ab94b7c70a6fceec98d48cd9b3474e93becaa",
+  "no_asset_id": "a2cefb3ddee022ee6aea15a5eef629ec3d15fa82d74f734f3e4338d19f67ad98",
+  "puzzle_hex": "ff02ffff03ffff21ffff20ff2f80ffff09ff2fffff01018080ffff01ff04ffff04ffff012cffff04ff02ffff04ffff0eff17ffff02ffff03ffff09ff2fffff010180ffff01ff0101ffff01ff010080ff018080ff80808080ffff04ffff04ffff0149ffff04ff81bfff808080ffff04ffff04ffff0133ffff04ff5fffff04ff81bfffff04ffff04ff5fffff04ffff02ffff03ffff09ff2fffff010180ffff0105ffff010b80ff0180ff808080ff8080808080ff80808080ffff01ff088080ff0180",
+  "puzzle_hash": "228625bace32411c6887fc9049b4ae1f1fd983f7a0874f586c7116493f77e63a",
+  "puzzle_clvm": "(a (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 44) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1)",
+  "curried_clvm": "(a (q 2 (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 44) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1) (c (q . 0x873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617) (c (q . 0xb5d1c85264be37f99be66ce96f1ab94b7c70a6fceec98d48cd9b3474e93becaa) (c (q . 0xa2cefb3ddee022ee6aea15a5eef629ec3d15fa82d74f734f3e4338d19f67ad98) (c (q . 0x8ca4f9107bd6601bd148ceee599b8128aec66bbb5a36358f2dd75833550370de) 1)))))",
+  "curried_hash": "6bf1d2b99c889a440ad87fad50f7f1521bb7aeb890b54036276410511985f3c6",
+  "puzzle_address": "xch1d0ca9wvu3zdygzkc07k4pal32gdm0t4cjz65qd38vsg9zxv970rqvmlt0u",
+  "test_amount": 1000,
+  "network": "testnet11",
+  "created_at": 1770730357.581254
+}

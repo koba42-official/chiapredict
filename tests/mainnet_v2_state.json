@@ -1,0 +1,13 @@
+{
+  "oracle_pubkey": "873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617",
+  "market_id": "0b4d97121ca3369adb8f9b1fb79aea137a35df84ec31937c96b69a1aaccc7f8b",
+  "yes_asset_id": "0a983b1dad437050c59c53a0119d45c68da6e59b98c76498ff8b6e4775daab10",
+  "no_asset_id": "d4f7fbe17d56ae12d8d1cd73c0b1597b05f19f5fc28eb42d9dd92a465fddb6b7",
+  "curried_hash": "52b3767fb9030fb0c96709bf624eb9655dac41470bc003bf08d4c1dbf0c9dcaf",
+  "puzzle_address": "xch122ehvlaeqv8mpjt8pxlkyn4ev4w6cs28p0qq80cg6nqahuxfmjhsrdamcg",
+  "curried_hex": "ff02ffff01ff02ffff03ffff21ffff20ff2f80ffff09ff2fffff01018080ffff01ff04ffff04ffff0132ffff04ff02ffff04ffff0eff17ffff02ffff03ffff09ff2fffff010180ffff01ff0101ffff01ff010080ff018080ff80808080ffff04ffff04ffff0149ffff04ff81bfff808080ffff04ffff04ffff0133ffff04ff5fffff04ff81bfffff04ffff04ff5fffff04ffff02ffff03ffff09ff2fffff010180ffff0105ffff010b80ff0180ff808080ff8080808080ff80808080ffff01ff088080ff0180ffff04ffff01b0873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617ffff04ffff01a00a983b1dad437050c59c53a0119d45c68da6e59b98c76498ff8b6e4775daab10ffff04ffff01a0d4f7fbe17d56ae12d8d1cd73c0b1597b05f19f5fc28eb42d9dd92a465fddb6b7ffff04ffff01a00b4d97121ca3369adb8f9b1fb79aea137a35df84ec31937c96b69a1aaccc7f8bff018080808080",
+  "puzzle_clvm": "(a (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1)",
+  "curried_clvm": "(a (q 2 (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1) (c (q . 0x873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617) (c (q . 0x0a983b1dad437050c59c53a0119d45c68da6e59b98c76498ff8b6e4775daab10) (c (q . 0xd4f7fbe17d56ae12d8d1cd73c0b1597b05f19f5fc28eb42d9dd92a465fddb6b7) (c (q . 0x0b4d97121ca3369adb8f9b1fb79aea137a35df84ec31937c96b69a1aaccc7f8b) 1)))))",
+  "amount": 1000,
+  "sig_type": "AggSigMe"
+}

@@ -1,0 +1,38 @@
+{
+  "question": "Will Chia XCH reach $50 by June 2026?",
+  "market_id": "a140ffcf9d403d6057c33552462139337ba9e1d068cbc989184ecffbeb8377c9",
+  "phase": "active",
+  "created_at": 1770750327.333354,
+  "oracle": {
+    "fingerprint": 1631380421,
+    "pubkey": "873e20f5c3df5e3be45900b0c10201d78f4965e60ef31b1d9a423e05c91c6e9bbb8df9e5fba60b7a88fd8ff4a29f8a19"
+  },
+  "yes_cat": {
+    "asset_id": "d169e699baeb7c18d66e08b02e1d3e562494519e57dd105052cd7459477f1765",
+    "supply": 1000000,
+    "issuer_fp": 1631380421
+  },
+  "no_cat": {
+    "asset_id": "1e87df1f8165207839a1dc4ad4e37fc100424d8842995aa736876c75358538c8",
+    "supply": 1000000,
+    "issuer_fp": 861103475
+  },
+  "puzzle": {
+    "base_clvm": "(a (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1)",
+    "curried_clvm": "(a (q 2 (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1) (c (q . 0x873e20f5c3df5e3be45900b0c10201d78f4965e60ef31b1d9a423e05c91c6e9bbb8df9e5fba60b7a88fd8ff4a29f8a19) (c (q . 0xd169e699baeb7c18d66e08b02e1d3e562494519e57dd105052cd7459477f1765) (c (q . 0x1e87df1f8165207839a1dc4ad4e37fc100424d8842995aa736876c75358538c8) (c (q . 0xa140ffcf9d403d6057c33552462139337ba9e1d068cbc989184ecffbeb8377c9) 1)))))",
+    "curried_hex": "ff02ffff01ff02ffff03ffff21ffff20ff2f80ffff09ff2fffff01018080ffff01ff04ffff04ffff0132ffff04ff02ffff04ffff0eff17ffff02ffff03ffff09ff2fffff010180ffff01ff0101ffff01ff010080ff018080ff80808080ffff04ffff04ffff0149ffff04ff81bfff808080ffff04ffff04ffff0133ffff04ff5fffff04ff81bfffff04ffff04ff5fffff04ffff02ffff03ffff09ff2fffff010180ffff0105ffff010b80ff0180ff808080ff8080808080ff80808080ffff01ff088080ff0180ffff04ffff01b0873e20f5c3df5e3be45900b0c10201d78f4965e60ef31b1d9a423e05c91c6e9bbb8df9e5fba60b7a88fd8ff4a29f8a19ffff04ffff01a0d169e699baeb7c18d66e08b02e1d3e562494519e57dd105052cd7459477f1765ffff04ffff01a01e87df1f8165207839a1dc4ad4e37fc100424d8842995aa736876c75358538c8ffff04ffff01a0a140ffcf9d403d6057c33552462139337ba9e1d068cbc989184ecffbeb8377c9ff018080808080",
+    "curried_hash": "2720653c029bb698402be72dc4c22746e1df15f2f07a53068aad79b884d35484",
+    "address": "xch1yusx20qznwmfssptuukufs38gmsa790j7pa9xp5244um3pxn2jzq2mgrhx"
+  },
+  "offers": {
+    "yes": {
+      "dexie_url": "https://dexie.space/offers/7jBLibcVPVPQiDVXsXTPhZcTf9ztvaY6ZUoyTxPBfhFL",
+      "offer_id": "601b06ee2a796b8f9633e980f90a31eb9b2ec17aad1c9574c564f865a8c9ecfe"
+    },
+    "no": {
+      "dexie_url": "https://dexie.space/offers/DDtoAPYJuKt87SDUCHwiGQp4HCav9WxATqZ9TtKPHHLx",
+      "offer_id": ""
+    }
+  },
+  "genesis_challenge": "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb"
+}

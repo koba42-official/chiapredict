@@ -1,0 +1,34 @@
+{
+  "question": "Will the temperature tomorrow in Moncton NB Canada break a high of 15 degrees C?",
+  "market_id": "336c36c5cb17066c832d46d9a2c388b4076c28811f3a2d2725c3232761085c82",
+  "phase": "active",
+  "created_at": 1770749399.1608992,
+  "oracle": {
+    "name": "DracattusDev",
+    "fingerprint": 1631380421,
+    "pubkey": "873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617"
+  },
+  "yes_cat": {
+    "asset_id": "f1d4b8180e2b21b0d0d3fb978551d58798624694b6144f38c7049161054407d9",
+    "supply": 100000
+  },
+  "no_cat": {
+    "asset_id": "342cb251a3c946db570e61db0d0418ef68201889f0a7635d08d24571f2aa69d0",
+    "supply": 100000
+  },
+  "puzzle": {
+    "base_clvm": "(a (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1)",
+    "curried_clvm": "(a (q 2 (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1) (c (q . 0x873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617) (c (q . 0xf1d4b8180e2b21b0d0d3fb978551d58798624694b6144f38c7049161054407d9) (c (q . 0x342cb251a3c946db570e61db0d0418ef68201889f0a7635d08d24571f2aa69d0) (c (q . 0x336c36c5cb17066c832d46d9a2c388b4076c28811f3a2d2725c3232761085c82) 1)))))",
+    "curried_hex": "ff02ffff01ff02ffff03ffff21ffff20ff2f80ffff09ff2fffff01018080ffff01ff04ffff04ffff0132ffff04ff02ffff04ffff0eff17ffff02ffff03ffff09ff2fffff010180ffff01ff0101ffff01ff010080ff018080ff80808080ffff04ffff04ffff0149ffff04ff81bfff808080ffff04ffff04ffff0133ffff04ff5fffff04ff81bfffff04ffff04ff5fffff04ffff02ffff03ffff09ff2fffff010180ffff0105ffff010b80ff0180ff808080ff8080808080ff80808080ffff01ff088080ff0180ffff04ffff01b0873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617ffff04ffff01a0f1d4b8180e2b21b0d0d3fb978551d58798624694b6144f38c7049161054407d9ffff04ffff01a0342cb251a3c946db570e61db0d0418ef68201889f0a7635d08d24571f2aa69d0ffff04ffff01a0336c36c5cb17066c832d46d9a2c388b4076c28811f3a2d2725c3232761085c82ff018080808080",
+    "curried_hash": "0bc2e9a70df081e4a5ece80542a66a15421d1516afc17ba19c00fdb0bea44e3f",
+    "address": "xch1p0pwnfcd7zq7ff0vaqz59fn2z4pp69gk4lqhhgvuqr7mp04yfclskwdr09"
+  },
+  "offers": {
+    "yes": {
+      "offer_id": "ea448a6eea39afe2a99cdef7894ba01692d5dec2bca3e2da7c876269a5362694",
+      "dexie_id": "2qoYSq6RLmpr6hVbkcwx17HHDjPyXdjGGLZcCWpt5CJa",
+      "dexie_url": "https://dexie.space/offers/2qoYSq6RLmpr6hVbkcwx17HHDjPyXdjGGLZcCWpt5CJa"
+    }
+  },
+  "genesis_challenge": "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb"
+}

@@ -19,10 +19,15 @@ import sys
 import os
 import time
 
-VENV_PYTHON = "/Users/alphanerd/Dev/chia-predict/.venv/bin/python3"
-RUE_BIN = "/Users/alphanerd/Dev/rue-lang/target/release/rue"
-PUZZLE_PATH = "/Users/alphanerd/Dev/chia-predict/puzzles/oracle_payout.rue"
-PROJECT_DIR = "/Users/alphanerd/Dev/chia-predict"
+# Get script directory and project root
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
+VENV_PYTHON = os.path.join(PROJECT_DIR, ".venv", "bin", "python3")
+RUE_BIN = os.environ.get("RUE_BIN", "rue")  # Default to rue on PATH
+PUZZLE_PATH = os.path.join(PROJECT_DIR, "puzzles", "oracle_payout.rue")
+
+# OFF LIMITS — never interact
+FORBIDDEN_FPS = [1849776284]
 
 # Test amount: 1000 mojos = minimum for a coin
 TEST_AMOUNT = 1000
@@ -44,6 +49,12 @@ def main():
     print("=" * 60)
     print("ChiaPredict — E2E Mainnet Test (1000 mojos)")
     print("=" * 60)
+    
+    # Check forbidden fingerprints before any wallet interaction
+    oracle_fp = 1631380421  # DracattusDev fingerprint
+    if oracle_fp in FORBIDDEN_FPS:
+        print(f"❌ Oracle wallet fp:{oracle_fp} is FORBIDDEN! Script blocked.")
+        sys.exit(1)
 
     # Step 1: Verify network
     print("\n[1] Verifying network...")
@@ -138,8 +149,7 @@ def main():
         "created_at": time.time(),
     }
     
-    state_path = os.path.join(PROJECT_DIR, "tests", "e2e_state.json")
-    os.makedirs(os.path.dirname(state_path), exist_ok=True)
+    state_path = os.path.join(SCRIPT_DIR, "e2e_state.json")
     with open(state_path, "w") as f:
         json.dump(test_state, f, indent=2)
     print(f"\n    State saved: {state_path}")

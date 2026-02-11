@@ -21,11 +21,16 @@ import sys
 import os
 import time
 
-PROJECT_DIR = "/Users/alphanerd/Dev/chia-predict"
-RUE_BIN = "/Users/alphanerd/Dev/rue-lang/target/release/rue"
-PUZZLE_PATH = f"{PROJECT_DIR}/puzzles/oracle_payout.rue"
+# Get script directory and project root
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
+RUE_BIN = os.environ.get("RUE_BIN", "rue")  # Default to rue on PATH
+PUZZLE_PATH = os.path.join(PROJECT_DIR, "puzzles", "oracle_payout.rue")
 ACTIVATE = f"source {PROJECT_DIR}/.venv/bin/activate"
-STATE_DIR = f"{PROJECT_DIR}/tests/round2"
+STATE_DIR = os.path.join(SCRIPT_DIR, "round2")
+
+# OFF LIMITS — never interact
+FORBIDDEN_FPS = [1849776284]
 
 GENESIS_CHALLENGE = "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb"
 TEST_AMOUNT = 1000
@@ -428,6 +433,12 @@ def step_spend(state):
 
 
 def main():
+    # Check forbidden fingerprints before any wallet interaction
+    oracle_fp = 1631380421  # DracattusDev fingerprint
+    if oracle_fp in FORBIDDEN_FPS:
+        print(f"❌ Oracle wallet fp:{oracle_fp} is FORBIDDEN! Script blocked.")
+        sys.exit(1)
+
     phase = sys.argv[1] if len(sys.argv) > 1 else "--all"
 
     if phase in ("--all", "--curry"):

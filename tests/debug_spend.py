@@ -9,10 +9,15 @@ import hashlib
 import sys
 import os
 
-PROJECT_DIR = "/Users/alphanerd/Dev/chia-predict"
-RUE_BIN = "/Users/alphanerd/Dev/rue-lang/target/release/rue"
-PUZZLE_PATH = f"{PROJECT_DIR}/puzzles/oracle_payout.rue"
+# Get script directory and project root
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
+RUE_BIN = os.environ.get("RUE_BIN", "rue")  # Default to rue on PATH
+PUZZLE_PATH = os.path.join(PROJECT_DIR, "puzzles", "oracle_payout.rue")
 ACTIVATE = f"source {PROJECT_DIR}/.venv/bin/activate"
+
+# OFF LIMITS — never interact
+FORBIDDEN_FPS = [1849776284]
 
 # Mainnet genesis challenge (AGG_SIG_ME additional data)
 GENESIS_CHALLENGE = "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb"
@@ -26,7 +31,7 @@ AMOUNT = 1000
 YES_ASSET_ID = "cd2eb0b4307e784be90d05e18fec22857a7bdf9c77f0f9e38f183a24de55ef58"
 NO_ASSET_ID = "7090c0ffaee10faec9da78c7dc7bb41d4d1c9c8b1ffb88bd6e8d3e2abf38a2e3"
 MARKET_ID = "0b4d97121ca3369adb8f9b1fb79aea137a35df84ec31937c96b69a1aaccc7f8b"
-ORACLE_SK = "39b72aa8ccc89391c2152927ba9d2733c6ad87f1af946fca26f13bf650a312f2"
+ORACLE_SK = os.environ.get("ORACLE_SK", "")  # NEVER hardcode secret keys — set via environment variable
 ORACLE_PK = "873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617"
 
 # Receiver
@@ -61,6 +66,17 @@ def main():
     print("=" * 60)
     print("ChiaPredict — Spend Bundle Debug")
     print("=" * 60)
+    
+    # Check forbidden fingerprints before any wallet interaction
+    if 1631380421 in FORBIDDEN_FPS:  # Hardcoded oracle fingerprint check
+        print(f"❌ Oracle wallet fp:1631380421 is FORBIDDEN! Script blocked.")
+        sys.exit(1)
+        
+    if not os.environ.get("ORACLE_SK"):
+        print("❌ ORACLE_SK environment variable not set!")
+        print("   This script requires the oracle secret key via environment variable.")
+        print("   Usage: ORACLE_SK=<hex_key> python3 debug_spend.py")
+        sys.exit(1)
 
     # Step 1: Compute coin_id
     print("\n[1] Computing coin_id...")
@@ -155,7 +171,7 @@ def main():
         }
     }
 
-    bundle_path = f"{PROJECT_DIR}/tests/debug_spend_bundle.json"
+    bundle_path = os.path.join(SCRIPT_DIR, "debug_spend_bundle.json")
     with open(bundle_path, "w") as f:
         json.dump(spend_bundle, f, indent=2)
     print(f"  Saved: {bundle_path}")

@@ -1,21 +1,45 @@
 # ChiaPredict — Prediction Markets on Chia
 
-Trustless prediction markets built on the Chia blockchain using Rue puzzles, CATs, and Dexie offers.
+Trustless prediction markets built on the Chia blockchain using Rue smart contracts, CAT tokens, and Dexie DEX.
 
-**Status: Oracle payout puzzle tested on mainnet ✅ (2026-02-10)**
+**Status: Phase 1 Complete — Full E2E lifecycle proven on mainnet ✅**
+
+🌐 **Live**: [chiapredict.dracattus.com](https://chiapredict.dracattus.com)
+📦 **Source**: [git.dracattus.com/dracattus/chia-predict](https://git.dracattus.com/dracattus/chia-predict)
+
+---
+
+## How It Works
+
+1. **Create** — Market creator defines a question, mints YES/NO CAT tokens, locks XCH in a Rue puzzle
+2. **Trade** — YES/NO tokens listed on [Dexie](https://dexie.space) for peer-to-peer trading
+3. **Resolve** — Oracle signs the outcome using BLS signatures; puzzle validates and releases funds
+4. **Redeem** — Winners exchange tokens for XCH via Dexie buyback offers
+
+## What's Been Proven on Mainnet
+
+- ✅ Rue puzzle compilation, currying, and deployment
+- ✅ BLS AggSigMe oracle signing and validation
+- ✅ YES/NO CAT minting (standard single-issuance TAIL)
+- ✅ Dexie offer creation, listing, and acceptance
+- ✅ Oracle resolution spend (puzzle → XCH to receiver)
+- ✅ v2 timeout puzzle (AssertHeightAbsolute refund path)
+- ✅ Market creation automation (end-to-end script)
+- ✅ Offer cancellation (on-chain invalidation)
+- ✅ Multi-wallet minting (oracle ≠ minter)
 
 ## Architecture
 
 ```
 ┌─────────────────────────────────────────────┐
-│              OpenClaw CLI / Chat             │
-│         (create, bet, resolve, redeem)       │
+│           Frontend (Static HTML)             │
+│   Market viewer, economics, how-it-works     │
 ├─────────────────────────────────────────────┤
-│              Web Frontend (Next.js)          │
-│      (market browser, order books, wallet)   │
+│           Python CLI Scripts                 │
+│   create_market · resolve · redeem           │
 ├──────────┬──────────┬───────────────────────┤
-│ Sage     │ Dexie    │  Spacescan            │
-│ Wallet   │ DEX API  │  Explorer API         │
+│ Sage     │ Dexie    │ FireAcademy /          │
+│ Wallet   │ DEX API  │ Spacescan APIs         │
 ├──────────┴──────────┴───────────────────────┤
 │              Chia Blockchain                  │
 │  ┌────────────┐  ┌──────────┐  ┌─────────┐ │
@@ -26,94 +50,167 @@ Trustless prediction markets built on the Chia blockchain using Rue puzzles, CAT
 └─────────────────────────────────────────────┘
 ```
 
-## Proven on Mainnet
-
-The oracle payout puzzle has been tested end-to-end on Chia mainnet:
-
-1. **Compiled** Rue puzzle → CLVM bytecode
-2. **Curried** with oracle pubkey, market ID, YES/NO asset IDs
-3. **Locked** 1000 mojos into custom puzzle (block 8,296,978)
-4. **Oracle signed** outcome (YES wins) using BLS AggSigMe
-5. **Spent** puzzle, mojos returned to wallet (block 8,297,293)
-
-## Market Lifecycle
-
-1. **Create** — Creator locks XCH, mints YES/NO CATs (standard single-issuance)
-2. **Trade** — YES/NO tokens trade via Chia offers on Dexie
-3. **Resolve** — Oracle signs outcome (YES or NO wins)
-4. **Redeem** — Winning token holders spend oracle payout puzzle, receive XCH
-
 ## Project Structure
 
 ```
 chia-predict/
 ├── puzzles/
-│   └── oracle_payout.rue    # Core puzzle (AggSigMe, mainnet-tested)
+│   ├── oracle_payout.rue       # v1 puzzle — oracle resolution only
+│   └── oracle_payout_v2.rue    # v2 puzzle — oracle resolution + timeout refund
 ├── scripts/
-│   ├── e2e_mainnet_test.py  # End-to-end test script
-│   ├── create_market.py     # Market creation automation
-│   └── spend_puzzle.py      # Puzzle spending script
+│   ├── create_market_v2.py     # Full market creation (mint, compile, fund, offer)
+│   ├── resolve_market.py       # Oracle resolution with on-chain confirmation
+│   └── redeem_market.py        # Post buyback offers for winners
 ├── tests/
-│   ├── mainnet_v2_state.json   # Successful mainnet test state
-│   └── submit_body_aggsigme.json # Working spend bundle
-├── frontend/                # Next.js app (planned)
+│   ├── clean_e2e_test.py       # Clean E2E test (compile → fund → spend)
+│   ├── debug_spend.py          # Manual spend bundle debugging
+│   └── e2e_mainnet_test.py     # Original mainnet test
+├── markets/                    # Market state (one dir per market)
+│   └── {market_id}/state.json  # Full state: CATs, puzzle, offers, resolution
+├── frontend/
+│   └── index.html              # Production frontend (deployed)
 ├── docs/
-│   └── PROTOCOL.md          # Full protocol specification
-└── .venv/                   # Python 3.12 + chia-dev-tools
+│   ├── PROTOCOL.md             # Protocol specification
+│   ├── AUDIT_REPORT.md         # Production readiness audit
+│   └── SCRIPT_CHANGES.md       # Script hardening changelog
+└── .venv/                      # Python 3.12 + chia-dev-tools + blspy
 ```
+
+## Puzzles
+
+### v1 — Oracle Payout (`oracle_payout.rue`)
+- Curried params: `oracle_pubkey`, `yes_asset_id`, `no_asset_id`, `market_id`
+- Solution: `outcome` (0=NO, 1=YES), `receiver_puzzle_hash`, `my_amount`
+- Oracle signs via **AggSigMe** (opcode 50) with outcome byte appended
+- Outputs: AssertMyAmount + CreateCoin to receiver with CAT memo
+
+### v2 — Oracle Payout with Timeout (`oracle_payout_v2.rue`)
+- Additional curried param: `timeout_height` (absolute block height)
+- Solution adds `mode` param: 0=oracle resolution, 1=timeout refund
+- Timeout path uses `AssertHeightAbsolute` — anyone can claim after timeout
+- 3/3 tests passing
+
+## Scripts
+
+All scripts are production-hardened with:
+- **FORBIDDEN_FPS** guard (wallet `1849776284` is protected in every script)
+- **Confirmation prompts** for destructive actions (`--yes` to skip)
+- **Fee support** (`--fee` flag, default 0)
+- **On-chain state confirmation** (state updated only after tx confirms)
+- **Offer cancellation** on resolution (spends coins to invalidate Dexie offers)
+- **Relative paths** (no hardcoded user directories)
+
+### Create a Market
+```bash
+RUE_BIN=/path/to/rue python3 scripts/create_market_v2.py \
+  "Will XCH reach $50 by June 2026?" \
+  --oracle-fp 1631380421 \
+  --mint-fp 861103475 \
+  --supply 1000000 \
+  --offer-qty 100000 \
+  --offer-price 550 \
+  --fund-amount 100000 \
+  --timeout-blocks 100000 \
+  --fee 0
+```
+
+### Resolve a Market
+```bash
+python3 scripts/resolve_market.py markets/{market_id} --outcome yes --yes
+```
+
+### Post Buyback Offers
+```bash
+python3 scripts/redeem_market.py markets/{market_id} --qty 100000 --price 1000 --yes
+```
+
+## Economics
+
+ChiaPredict uses a **spread-based revenue model**:
+
+- YES + NO tokens priced so the pair costs more than the payout (e.g., 55 + 55 = 110 for 100 payout)
+- The difference is the house edge (10-20% typical)
+- No market creation fees (Phase 1)
+- No resolution fees (Phase 1)
+- Full transparency: all transactions verifiable on-chain
+
+See the [Economics section](https://chiapredict.dracattus.com/#economics) on the website for detailed examples.
+
+## Trust Model (Honest Assessment)
+
+**Phase 1 (Current):** Single trusted oracle. The oracle can resolve any outcome and could theoretically delay resolution. The oracle **cannot** steal locked funds or change market terms post-creation. v2 puzzles include timeout refunds if the oracle disappears.
+
+**Phase 2 (Planned):** Multi-signature oracle with M-of-N threshold. Community review and whitepaper.
+
+**Phase 3 (Vision):** Decentralized oracle network with staking and slashing.
 
 ## Tech Stack
 
-- **Puzzles:** [Rue](https://rue-lang.com) (compiles to CLVM)
-- **Tokens:** Standard CATs (single-issuance TAIL)
-- **Trading:** Chia offer files + Dexie aggregation
-- **Wallet:** Sage Wallet (CLI + WalletConnect)
-- **Frontend:** Next.js + React (planned)
-- **Automation:** OpenClaw skills (planned)
-- **Explorer:** Spacescan API + FireAcademy RPC
+- **Smart Contracts:** [Rue](https://github.com/xch-dev/rue) → CLVM
+- **Tokens:** Standard Chia CATs (single-issuance TAIL)
+- **Trading:** Chia native offer files + [Dexie](https://dexie.space) aggregation
+- **Wallet:** [Sage](https://github.com/xch-dev/sage) (CLI v0.12.2 + GUI)
+- **Signing:** BLS signatures via blspy 2.0.3
+- **Frontend:** Static HTML (dark theme, responsive, Dexie API integration)
+- **Backend:** Python 3.12 scripts + chia-dev-tools 1.2.15
+- **Broadcasting:** FireAcademy RPC (`kraken.fireacademy.io`)
 
-## Key Technical Notes
-
-- Use **AggSigMe** (opcode 50), not AggSigPuzzle (44) — additional data handling is simpler and proven
-- Push transactions via `https://kraken.fireacademy.io/leaflet/push_tx` for reliable broadcasting
-- Rue must be built from git (`github.com/xch-dev/rue`), not `cargo install rue-cli`
-- Python venv requires 3.12 (chia_rs won't build on 3.14)
-
-## Development
+## Development Setup
 
 ```bash
-# Build Rue compiler
-cd /path/to/rue-lang && cargo build --release
+# 1. Build Rue compiler
+git clone https://github.com/xch-dev/rue.git
+cd rue && cargo build --release
 
-# Set up Python environment
+# 2. Python environment (requires 3.12 — chia_rs won't build on 3.14)
 python3.12 -m venv .venv
 source .venv/bin/activate
-pip install chia-dev-tools
+pip install chia-dev-tools blspy
 
-# Compile puzzle
-rue build puzzles/oracle_payout.rue
+# 3. Install Sage CLI (must match GUI version)
+cargo install sage-cli --git https://github.com/xch-dev/sage.git --tag v0.12.2
 
-# Run tests
-rue test puzzles/oracle_payout.rue
+# 4. Set Rue binary path
+export RUE_BIN=/path/to/rue-lang/target/release/rue
+
+# 5. Compile and test puzzles
+$RUE_BIN build puzzles/oracle_payout_v2.rue
+$RUE_BIN test puzzles/oracle_payout_v2.rue
 ```
 
 ## Roadmap
 
-- [x] Oracle payout puzzle (Rue)
-- [x] Mainnet E2E test
-- [ ] CAT minting (YES/NO tokens per market)
-- [ ] Market creation script (lock XCH + mint CATs atomically)
-- [ ] Dexie offer integration (list YES/NO pairs)
-- [ ] OpenClaw skill for market management
-- [ ] Market making bot
-- [ ] Web frontend (market browser + wallet connect)
-- [ ] Timeout/refund mechanism (if oracle never resolves)
-- [ ] Multi-sig oracle support
+- [x] Oracle payout puzzle v1 (Rue, AggSigMe)
+- [x] Oracle payout puzzle v2 (timeout/refund via AssertHeightAbsolute)
+- [x] Mainnet E2E test (compile → fund → sign → spend → confirmed)
+- [x] CAT minting automation (YES/NO per market)
+- [x] Market creation script (mint + compile + fund + list on Dexie)
+- [x] Market resolution script (oracle sign + spend + state update)
+- [x] Redemption script (Dexie buyback offers)
+- [x] Dexie offer integration (live trading)
+- [x] Production frontend (market viewer + economics + how-it-works)
+- [x] Production audit + script hardening
+- [x] OpenClaw skill for market management
+- [ ] E2E buyer lifecycle test (buy → resolve → redeem)
+- [ ] Whitepaper
+- [ ] Multi-sig oracle (Phase 2)
+- [ ] WalletConnect integration
+- [ ] Market creation UI
+- [ ] Leaderboard + user profiles
+- [ ] Decentralized oracle (Phase 3)
+
+## Active Markets
+
+Visit [chiapredict.dracattus.com](https://chiapredict.dracattus.com) to see live markets with Dexie trading links.
 
 ## Legal
 
-Designed as open-source protocol tooling, not an exchange:
+ChiaPredict is open-source protocol tooling, not a centralized exchange:
 - XCH-native only (no fiat on/off ramp)
-- P2P offer-based trading (no central matching engine)
-- Users create and resolve markets directly
-- No custody of funds at any point
+- Peer-to-peer offer-based trading via Dexie (no central order book)
+- No custody of user funds at any point
+- All market state verifiable on-chain via Spacescan
+
+## License
+
+MIT

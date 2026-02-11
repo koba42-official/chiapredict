@@ -23,10 +23,12 @@ import time
 import urllib.request
 import argparse
 
-PROJECT_DIR = "/Users/alphanerd/Dev/chia-predict"
-RUE_BIN = "/Users/alphanerd/Dev/rue-lang/target/release/rue"
-PUZZLE_V2_PATH = f"{PROJECT_DIR}/puzzles/oracle_payout_v2.rue"
-PUZZLE_V1_PATH = f"{PROJECT_DIR}/puzzles/oracle_payout.rue"
+# Get script directory and project root
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
+RUE_BIN = os.environ.get("RUE_BIN", "rue")  # Default to rue on PATH
+PUZZLE_V2_PATH = os.path.join(PROJECT_DIR, "puzzles", "oracle_payout_v2.rue")
+PUZZLE_V1_PATH = os.path.join(PROJECT_DIR, "puzzles", "oracle_payout.rue")
 ACTIVATE = f"source {PROJECT_DIR}/.venv/bin/activate"
 GENESIS_CHALLENGE = "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb"
 
@@ -35,22 +37,59 @@ FORBIDDEN_FPS = [1849776284]
 
 
 def run(cmd, check=True):
-    r = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-    if check and r.returncode != 0:
-        print(f"ERROR: {cmd[:100]}")
-        print(f"STDERR: {r.stderr[:300]}")
-        sys.exit(1)
-    return r.stdout.strip()
+    try:
+        r = subprocess.run(cmd, shell=True, capture_output=True, text=True, env={**os.environ, "PYTHONUNBUFFERED": "1"})
+        if check and r.returncode != 0:
+            print(f"ERROR: {cmd[:100]}")
+            print(f"STDERR: {r.stderr[:300]}")
+            sys.exit(1)
+        return r.stdout.strip()
+    except Exception as e:
+        print(f"ERROR running command: {e}")
+        if check:
+            sys.exit(1)
+        return ""
 
 
 def sage_rpc(method, body):
-    raw = run(f"sage rpc {method} '{json.dumps(body)}'", check=False)
-    if not raw:
-        return None
     try:
+        raw = run(f"sage rpc {method} '{json.dumps(body)}'", check=False)
+        if not raw:
+            return None
         return json.loads(raw)
     except json.JSONDecodeError:
+        print(f"WARNING: sage_rpc {method} returned invalid JSON: {raw[:200]}")
         return {"raw": raw}
+    except Exception as e:
+        print(f"ERROR: sage_rpc {method} failed: {e}")
+        return None
+
+
+def get_current_blockchain_height():
+    """Get current blockchain height via FireAcademy API or Sage RPC."""
+    # Try FireAcademy first
+    try:
+        req = urllib.request.Request(
+            "https://kraken.fireacademy.io/leaflet/get_blockchain_state",
+            headers={"Content-Type": "application/json", "User-Agent": "ChiaPredict/0.1"}
+        )
+        resp = urllib.request.urlopen(req, timeout=30)
+        data = json.loads(resp.read())
+        if data.get("blockchain_state", {}).get("peak", {}).get("height"):
+            return data["blockchain_state"]["peak"]["height"]
+    except Exception as e:
+        print(f"  WARNING: FireAcademy get_blockchain_state failed: {e}")
+    
+    # Fallback to Sage RPC
+    try:
+        result = sage_rpc("get_blockchain_state", {})
+        if result and result.get("blockchain_state", {}).get("peak", {}).get("height"):
+            return result["blockchain_state"]["peak"]["height"]
+    except Exception as e:
+        print(f"  WARNING: Sage get_blockchain_state failed: {e}")
+    
+    print("  ERROR: Could not get current blockchain height from any source")
+    return None
 
 
 def login_and_wait(fp, label="wallet"):
@@ -115,14 +154,14 @@ def post_to_dexie(offer_str):
     return json.loads(resp.read())
 
 
-def create_dexie_offer(asset_id, ticker, offer_qty, offer_price):
+def create_dexie_offer(asset_id, ticker, offer_qty, offer_price, fee=0):
     """Create and post a Dexie offer for a CAT."""
     print(f"  Creating {ticker} offer ({offer_qty} tokens @ {offer_price} mojos each)...")
     xch_amount = offer_qty * offer_price // 1000
     offer_result = sage_rpc("make_offer", {
         "offered_assets": [{"asset_id": asset_id, "amount": offer_qty}],
         "requested_assets": [{"amount": xch_amount}],
-        "fee": 0,
+        "fee": fee,
     })
     if not offer_result or "offer" not in offer_result:
         print(f"  ❌ {ticker} offer creation failed: {offer_result}")
@@ -156,6 +195,8 @@ def main():
                         help="Timeout in blocks for refund (0 = no timeout, v1 puzzle)")
     parser.add_argument("--fund-amount", type=int, default=0,
                         help="Mojos to send to puzzle after creation (0 = skip)")
+    parser.add_argument("--fee", type=int, default=0,
+                        help="Fee in mojos for transactions (default: 0)")
     args = parser.parse_args()
 
     mint_fp = args.mint_fp or args.oracle_fp
@@ -166,8 +207,23 @@ def main():
             print(f"❌ Wallet fp:{fp} is OFF LIMITS!")
             sys.exit(1)
 
-    market_id = hashlib.sha256(args.question.encode()).hexdigest()
-    market_dir = f"{PROJECT_DIR}/markets/{market_id[:16]}"
+    # Get oracle key info first to include in market_id
+    login_and_wait(args.oracle_fp, "oracle")
+    keys = sage_rpc("get_keys", {})
+    oracle_key = None
+    for k in keys["keys"]:
+        if k["fingerprint"] == args.oracle_fp:
+            oracle_key = k
+            break
+    if not oracle_key:
+        print(f"  ❌ Oracle key fp:{args.oracle_fp} not found!")
+        sys.exit(1)
+        
+    # Generate market_id as per PROTOCOL.md: sha256(question + timestamp + oracle_pubkey)
+    timestamp = str(time.time())
+    market_id_input = args.question + timestamp + oracle_key["public_key"]
+    market_id = hashlib.sha256(market_id_input.encode()).hexdigest()
+    market_dir = os.path.join(PROJECT_DIR, "markets", market_id[:16])
     os.makedirs(market_dir, exist_ok=True)
 
     print("=" * 60)
@@ -179,23 +235,24 @@ def main():
         print(f"  Timeout: {args.timeout_blocks} blocks")
     print("=" * 60)
 
-    # Step 1: Get oracle key info
-    print("\n[1] Loading oracle key...")
-    login_and_wait(args.oracle_fp, "oracle")
-    keys = sage_rpc("get_keys", {})
-    oracle_key = None
-    for k in keys["keys"]:
-        if k["fingerprint"] == args.oracle_fp:
-            oracle_key = k
-            break
-    if not oracle_key:
-        print(f"  ❌ Oracle key fp:{args.oracle_fp} not found!")
-        sys.exit(1)
     print(f"  Oracle: {oracle_key['name']} (fp: {oracle_key['fingerprint']})")
 
     # Switch to mint wallet if different
     if mint_fp != args.oracle_fp:
         login_and_wait(mint_fp, "mint")
+        
+    # Step 1: Handle timeout computation for v2 puzzles
+    absolute_timeout_height = None
+    if use_v2:
+        print("\n[1] Computing absolute timeout height...")
+        current_height = get_current_blockchain_height()
+        if current_height is None:
+            print("  ❌ Cannot determine current blockchain height for timeout calculation")
+            sys.exit(1)
+        absolute_timeout_height = current_height + args.timeout_blocks
+        print(f"  Current height: {current_height}")
+        print(f"  Timeout blocks: {args.timeout_blocks}")
+        print(f"  Absolute timeout height: {absolute_timeout_height}")
 
     # Step 2: Issue YES CAT
     print(f"\n[2] Issuing YES CAT ({args.supply} supply)...")
@@ -203,7 +260,7 @@ def main():
         "name": f"CP-YES {args.question[:30]}",
         "ticker": "YES",
         "amount": args.supply,
-        "fee": 0,
+        "fee": args.fee,
     })
     if not yes_result or "coin_spends" not in yes_result:
         print(f"  ❌ Failed: {yes_result}")
@@ -230,7 +287,7 @@ def main():
         "name": f"CP-NO {args.question[:30]}",
         "ticker": "NO",
         "amount": args.supply,
-        "fee": 0,
+        "fee": args.fee,
     })
     if not no_result or "coin_spends" not in no_result:
         print(f"  ❌ Failed: {no_result}")
@@ -265,7 +322,7 @@ def main():
             f"-a 0x{yes_asset_id} "
             f"-a 0x{no_asset_id} "
             f"-a 0x{market_id} "
-            f"-a {args.timeout_blocks}"
+            f"-a {absolute_timeout_height}"
         )
     else:
         curried_clvm = run(
@@ -293,7 +350,7 @@ def main():
         fund_result = sage_rpc("send_xch", {
             "address": puzzle_address,
             "amount": args.fund_amount,
-            "fee": 0,
+            "fee": args.fee,
         })
         if fund_result and "coin_spends" in fund_result:
             sign_and_submit(fund_result["coin_spends"])
@@ -318,14 +375,14 @@ def main():
     else:
         print("  ⚠️ Still pending after 300s, attempting offers anyway...")
 
-    yes_offer = create_dexie_offer(yes_asset_id, "YES", args.offer_qty, args.offer_price)
+    yes_offer = create_dexie_offer(yes_asset_id, "YES", args.offer_qty, args.offer_price, args.fee)
     if yes_offer:
         offers["yes"] = yes_offer
 
     # Brief pause between offers
     time.sleep(5)
 
-    no_offer = create_dexie_offer(no_asset_id, "NO", args.offer_qty, args.offer_price)
+    no_offer = create_dexie_offer(no_asset_id, "NO", args.offer_qty, args.offer_price, args.fee)
     if no_offer:
         offers["no"] = no_offer
 
@@ -352,6 +409,7 @@ def main():
             "address": puzzle_address,
         },
         "timeout_blocks": args.timeout_blocks,
+        "absolute_timeout_height": absolute_timeout_height if use_v2 else None,
         "offers": offers,
         "genesis_challenge": GENESIS_CHALLENGE,
     }

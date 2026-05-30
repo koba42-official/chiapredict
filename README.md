@@ -1,5 +1,7 @@
 # ChiaPredict — Prediction Markets on Chia
 
+![ChiaPredict Logo](docs/assets/chiapredict-logo.jpg)
+
 Trustless prediction markets built on the Chia blockchain using Rue smart contracts, CAT tokens, and Dexie DEX.
 
 **Status: Phase 1 Complete — Full E2E lifecycle proven on mainnet ✅**

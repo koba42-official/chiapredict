@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChiaPredict — Trustless Prediction Markets on Chia</title>
+<meta name="description" content="Trade real-world outcomes with trustless prediction markets on Chia. Built with CAT tokens, Dexie DEX, and Rue smart contracts with transparent on-chain verification.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0a0b0f">
+<link rel="canonical" href="https://chiapredict.koba42.com/">
+
+<!-- OpenGraph Meta Tags -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ChiaPredict">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="ChiaPredict — Trustless Prediction Markets on Chia">
+<meta property="og:description" content="Trade real-world outcomes with trustless prediction markets on Chia, powered by CAT tokens, Dexie DEX, and Rue smart contracts.">
+<meta property="og:url" content="https://chiapredict.koba42.com/">
+<meta property="og:image" content="https://chiapredict.koba42.com/og-image.png">
+<meta property="og:image:secure_url" content="https://chiapredict.koba42.com/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ChiaPredict — Trustless prediction markets on the Chia blockchain">
+
+<!-- Twitter/X Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ChiaPredict — Trustless Prediction Markets on Chia">
+<meta name="twitter:description" content="Trade real-world outcomes with trustless prediction markets on Chia.">
+<meta name="twitter:image" content="https://chiapredict.koba42.com/og-image.png">
+<meta name="twitter:image:alt" content="ChiaPredict — Trustless prediction markets on the Chia blockchain">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-primary: #0a0b0f;
+  --bg-secondary: #12131a;
+  --bg-card: rgba(255,255,255,0.03);
+  --bg-card-hover: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.06);
+  --border-bright: rgba(255,255,255,0.12);
+  --text-primary: #f0f0f5;
+  --text-secondary: #8a8a9a;
+  --text-muted: #55556a;
+  --green: #22c55e;
+  --green-dim: rgba(34,197,94,0.15);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.15);
+  --purple: #7c3aed;
+  --blue: #3b82f6;
+  --gold: #f59e0b;
+  --gold-dim: rgba(245,158,11,0.15);
+  --brand-gradient: linear-gradient(135deg, #7c3aed, #3b82f6);
+  --brand-gradient-text: linear-gradient(135deg, #a78bfa, #60a5fa);
+  --glow-green: 0 0 20px rgba(34,197,94,0.15);
+  --glow-purple: 0 0 30px rgba(124,58,237,0.1);
+  --glow-gold: 0 0 20px rgba(245,158,11,0.15);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Animated background ── */
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(124,58,237,0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(59,130,246,0.06), transparent);
+}
+.bg-grid::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridShift 20s linear infinite;
+}
+@keyframes gridShift { to { transform: translate(60px, 60px); } }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* ── Navigation ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,11,15,0.8);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+nav .container {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: var(--brand-gradient);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 800; color: #fff;
+}
+.logo-text { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+.logo-text span { background: var(--brand-gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.nav-links { list-style: none; display: flex; gap: 32px; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--text-primary); }
+
+.nav-cta {
+  background: var(--brand-gradient); color: #fff !important;
+  padding: 8px 20px; border-radius: 8px; font-weight: 600;
+  transition: opacity .2s, transform .2s;
+}
+.nav-cta:hover { opacity: .9; transform: translateY(-1px); }
+
+.mobile-toggle { 
+  display: none; background: none; border: none; color: var(--text-primary); 
+  font-size: 20px; cursor: pointer; padding: 8px;
+}
+
+.mobile-menu {
+  display: none; position: absolute; top: 64px; left: 0; right: 0;
+  background: rgba(10,11,15,0.95); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); padding: 20px 24px;
+}
+.mobile-menu.show { display: block; }
+.mobile-menu a { 
+  display: block; color: var(--text-secondary); text-decoration: none; 
+  padding: 12px 0; font-size: 16px; font-weight: 500;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--text-primary); }
+
+/* ── Hero ── */
+.hero {
+  padding: 160px 0 100px; text-align: center;
+  position: relative;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2);
+  border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 500;
+  color: #a78bfa; margin-bottom: 24px;
+}
+.hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+
+.hero h1 {
+  font-size: clamp(40px, 6vw, 72px); font-weight: 800;
+  line-height: 1.05; margin-bottom: 20px;
+  letter-spacing: -0.03em;
+}
+.hero h1 .gradient {
+  background: var(--brand-gradient-text);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero p {
+  font-size: clamp(16px, 2vw, 20px); color: var(--text-secondary);
+  max-width: 600px; margin: 0 auto 40px; line-height: 1.6;
+}
+.hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600;
+  text-decoration: none; transition: all .25s; cursor: pointer; border: none;
+}
+.btn-primary { background: var(--brand-gradient); color: #fff; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,58,237,0.3); }
+.btn-secondary { background: rgba(255,255,255,0.05); color: var(--text-primary); border: 1px solid var(--border); }
+.btn-secondary:hover { background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+
+.hero-stats {
+  display: flex; justify-content: center; gap: 48px; margin-top: 64px;
+  padding-top: 48px; border-top: 1px solid var(--border);
+}
+.hero-stat { text-align: center; }
+.hero-stat .val { 
+  font-size: 28px; font-weight: 700; 
+  background: var(--brand-gradient-text); 
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+}
+.hero-stat .label { 
+  font-size: 13px; color: var(--text-muted); margin-top: 4px; 
+  text-transform: uppercase; letter-spacing: 0.05em; 
+}
+
+/* ── Section headings ── */
+section { padding: 100px 0; }
+.section-label {
+  font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+  background: var(--brand-gradient-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+.section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; }
+.section-subtitle { color: var(--text-secondary); font-size: 17px; max-width: 600px; }
+.section-header { margin-bottom: 48px; }
+
+/* ── Market Cards ── */
+.markets-section { margin-bottom: 64px; }
+.markets-grid { display: flex; flex-direction: column; gap: 24px; }
+
+.market-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+.market-card::before {
+  content: ''; position: absolute; inset: 0; border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(59,130,246,0.05), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none; opacity: 0; transition: opacity .3s;
+}
+.market-card:hover::before { opacity: 1; }
+.market-card:hover { background: var(--bg-card-hover); transform: translateY(-2px); box-shadow: var(--glow-purple); }
+
+.market-card.resolved { opacity: .85; }
+.market-card.resolved:hover { opacity: 1; }
+
+.market-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+.market-question { font-size: 19px; font-weight: 600; line-height: 1.35; flex: 1; }
+
+.badge {
+  font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+  padding: 4px 12px; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+}
+.badge-active { background: var(--green-dim); color: var(--green); }
+.badge-resolved { background: var(--gold-dim); color: var(--gold); }
+.badge-test { background: rgba(59,130,246,0.15); color: #60a5fa; margin-left: 8px; }
+
+/* Probability bar */
+.prob-bar-wrap { margin-bottom: 24px; }
+.prob-labels { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; font-weight: 600; }
+.prob-yes { color: var(--green); }
+.prob-no { color: var(--red); }
+.prob-bar {
+  height: 48px; border-radius: 12px; overflow: hidden;
+  display: flex; position: relative;
+  background: var(--red-dim);
+}
+.prob-bar .yes-fill {
+  height: 100%; background: linear-gradient(90deg, #16a34a, #22c55e);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700; color: #fff;
+  transition: width .8s cubic-bezier(.4,0,.2,1);
+  position: relative; z-index: 1;
+  min-width: 50px;
+}
+.prob-bar .no-fill {
+  flex: 1; height: 100%;
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700; color: #fff;
+  min-width: 50px;
+}
+
+/* Resolved bar */
+.resolved-bar {
+  height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+  font-size: 15px; font-weight: 700; color: #fff; gap: 8px;
+}
+.resolved-bar.yes-winner { background: linear-gradient(90deg, #16a34a, #22c55e); }
+.resolved-bar.no-winner { background: linear-gradient(90deg, #ef4444, #dc2626); }
+
+.market-meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 24px;
+  font-size: 13px;
+}
+.meta-item { }
+.meta-item dt { font-weight: 500; color: var(--text-muted); margin-bottom: 4px; }
+.meta-item dd { font-weight: 600; color: var(--text-secondary); }
+.meta-item.supply dd { color: var(--purple); }
+.meta-item.oracle dd { color: var(--blue); }
+
+.market-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-trade {
+  flex: 1; min-width: 160px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 24px; border-radius: 12px;
+  font-size: 14px; font-weight: 600; text-decoration: none;
+  transition: all .25s; cursor: pointer; border: none;
+}
+.btn-yes { background: var(--green-dim); color: var(--green); }
+.btn-yes:hover { background: rgba(34,197,94,0.25); box-shadow: var(--glow-green); transform: translateY(-1px); }
+.btn-no { background: var(--red-dim); color: var(--red); }
+.btn-no:hover { background: rgba(239,68,68,0.25); box-shadow: 0 0 20px rgba(239,68,68,0.15); transform: translateY(-1px); }
+.btn-resolved { background: var(--gold-dim); color: var(--gold); }
+.btn-resolved:hover { background: rgba(245,158,11,0.25); box-shadow: var(--glow-gold); transform: translateY(-1px); }
+
+.verification-links {
+  margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);
+  display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px;
+}
+.verification-links a {
+  color: var(--text-muted); text-decoration: none; 
+  padding: 4px 8px; border-radius: 6px;
+  background: rgba(255,255,255,0.03);
+  transition: all .2s;
+}
+.verification-links a:hover {
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.06);
+}
+
+.live-note {
+  font-size: 11px; color: var(--text-muted); margin-top: 12px; font-style: italic;
+}
+.live-note a { color: #60a5fa; text-decoration: none; }
+.live-note a:hover { text-decoration: underline; }
+
+/* ── How It Works ── */
+.steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 48px; }
+.step-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 32px 24px; text-align: center; transition: all .3s;
+  position: relative;
+}
+.step-card:hover { background: var(--bg-card-hover); transform: translateY(-4px); }
+.step-num {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--brand-gradient); display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 700; color: #fff; margin: 0 auto 20px;
+}
+.step-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+.step-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+/* ── Economics Section ── */
+.economics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 48px; }
+.econ-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 32px; transition: all .3s;
+}
+.econ-card:hover { background: var(--bg-card-hover); transform: translateY(-2px); }
+.econ-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--text-primary); }
+.econ-card p, .econ-card ul { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.econ-card ul { margin: 16px 0; padding-left: 20px; }
+.econ-card li { margin-bottom: 8px; }
+.econ-card .highlight { color: var(--text-primary); font-weight: 600; }
+.econ-card .example { background: rgba(124,58,237,0.06); border-left: 3px solid var(--purple); padding: 16px; margin: 16px 0; border-radius: 8px; }
+.econ-card .warning { background: rgba(239,68,68,0.06); border-left: 3px solid var(--red); padding: 16px; margin: 16px 0; border-radius: 8px; }
+
+/* ── Architecture ── */
+.arch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.arch-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 32px 24px; transition: all .3s;
+}
+.arch-card:hover { background: var(--bg-card-hover); transform: translateY(-2px); }
+.arch-icon {
+  width: 48px; height: 48px; border-radius: 12px; margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+}
+.arch-icon.purple { background: rgba(124,58,237,0.15); }
+.arch-icon.blue { background: rgba(59,130,246,0.15); }
+.arch-icon.green { background: rgba(34,197,94,0.15); }
+.arch-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+.arch-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+.trust-model {
+  margin-top: 48px; padding: 32px; border-radius: 16px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(59,130,246,0.05));
+  border: 1px solid rgba(124,58,237,0.15);
+}
+.trust-model h3 { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: var(--text-primary); }
+.trust-phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
+.phase { text-align: center; }
+.phase-num { 
+  width: 32px; height: 32px; border-radius: 50%; 
+  background: var(--brand-gradient); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; margin: 0 auto 12px;
+}
+.phase h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.phase p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+.phase.current { }
+.phase.current .phase-num { background: var(--green); }
+
+/* ── FAQ ── */
+.faq-grid { display: grid; gap: 16px; }
+.faq-item {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+  overflow: hidden; transition: all .3s;
+}
+.faq-item:hover { background: var(--bg-card-hover); }
+.faq-question {
+  padding: 24px 32px; font-size: 16px; font-weight: 600;
+  cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+}
+.faq-question::after {
+  content: '+'; font-size: 24px; color: var(--text-muted);
+  transition: transform .2s;
+}
+.faq-item.open .faq-question::after { transform: rotate(45deg); }
+.faq-answer {
+  padding: 0 32px 24px; color: var(--text-secondary);
+  font-size: 14px; line-height: 1.6;
+  display: none;
+}
+.faq-item.open .faq-answer { display: block; }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 64px 0;
+  background: var(--bg-secondary);
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+.footer-brand p { color: var(--text-secondary); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+.footer-version { font-size: 12px; color: var(--text-muted); font-family: monospace; }
+
+.footer-links h4 { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: var(--text-primary); }
+.footer-links ul { list-style: none; }
+.footer-links li { margin-bottom: 12px; }
+.footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color .2s; }
+.footer-links a:hover { color: var(--text-primary); }
+
+.footer-bottom {
+  padding-top: 32px; border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.footer-copy { font-size: 13px; color: var(--text-muted); }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a { color: var(--text-muted); text-decoration: none; font-size: 13px; transition: color .2s; }
+.footer-legal a:hover { color: var(--text-primary); }
+
+.last-updated {
+  text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 32px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .mobile-toggle { display: block; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .arch-grid { grid-template-columns: 1fr; }
+  .economics-grid { grid-template-columns: 1fr; }
+  .trust-phases { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .market-card { padding: 24px; }
+  .market-question { font-size: 17px; }
+  .market-actions { flex-direction: column; }
+  .btn-trade { min-width: 100%; }
+  section { padding: 64px 0; }
+  .hero { padding: 120px 0 64px; }
+}
+@media (max-width: 480px) {
+  .steps-grid { grid-template-columns: 1fr; }
+  .hero-stats { flex-direction: column; gap: 16px; }
+  .verification-links { flex-direction: column; }
+}
+
+/* ── Fade-in animation ── */
+.fade-up {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .6s, transform .6s;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Animated counters ── */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.counter { animation: countUp 0.6s ease-out; }
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<!-- Nav -->
+<nav>
+  <div class="container">
+    <a href="#" class="logo">
+      <div class="logo-icon">🌿</div>
+      <div class="logo-text">Chia<span>Predict</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#markets">Markets</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#economics">Economics</a></li>
+      <li><a href="#architecture">Technology</a></li>
+      <li><a href="#trust">Trust Model</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="https://dexie.space" target="_blank" class="nav-cta">Trade on Dexie ↗</a></li>
+    </ul>
+    <button class="mobile-toggle" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#markets">Markets</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#economics">Economics</a>
+      <a href="#architecture">Technology</a>
+      <a href="#trust">Trust Model</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://dexie.space" target="_blank">Trade on Dexie ↗</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge"><span class="dot"></span> Live on Chia Mainnet</div>
+    <h1>Prediction Markets,<br><span class="gradient">On Chia</span></h1>
+    <p>Trade on real-world outcomes using CAT tokens and smart contracts. Built with Rue, verified on-chain, powered by Dexie DEX. Currently in Phase 1 with trusted oracle.</p>
+    <div class="hero-buttons">
+      <a href="#markets" class="btn btn-primary">Explore Markets ↓</a>
+      <a href="https://git.dracattus.com/dracattus/chia-predict" target="_blank" class="btn btn-secondary">View Source Code</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val counter" data-target="1">0</div><div class="label">Markets Resolved</div></div>
+      <div class="hero-stat"><div class="val counter" data-target="2000">0</div><div class="label">Tokens Minted</div></div>
+      <div class="hero-stat"><div class="val">Phase 1</div><div class="label">Trust Model</div></div>
+      <div class="hero-stat"><div class="val">100%</div><div class="label">On-Chain</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Markets -->
+<section id="markets">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">Live Markets</div>
+      <div class="section-title">Trade Your Conviction</div>
+      <div class="section-subtitle">Each market issues YES and NO CAT tokens. Prices reflect the crowd's probability estimate. All settlements are verified on-chain.</div>
+    </div>
+
+    <div class="markets-section">
+      <div class="markets-grid" id="active-markets-grid">
+        <!-- Active markets rendered by JS -->
+      </div>
+    </div>
+
+    <div class="markets-section">
+      <div class="section-header fade-up">
+        <div class="section-label">Past Markets</div>
+        <div class="section-title">Settlement History</div>
+        <div class="section-subtitle">Resolved and test markets showing how the protocol handles different outcomes.</div>
+      </div>
+      <div class="markets-grid" id="past-markets-grid">
+        <!-- Past markets rendered by JS -->
+      </div>
+    </div>
+
+    <div class="last-updated" id="last-updated"></div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-header fade-up" style="text-align:center">
+      <div class="section-label">How It Works</div>
+      <div class="section-title">Four Steps to Prediction Trading</div>
+      <div class="section-subtitle" style="margin:0 auto">From market creation to settlement — everything happens on Chia's blockchain with full transparency.</div>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card fade-up">
+        <div class="step-num">1</div>
+        <h3>Market Creation</h3>
+        <p>Creator defines a question with deadline, mints equal YES/NO CAT tokens, locks XCH in a Rue smart contract puzzle for redemption.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">2</div>
+        <h3>Trading on Dexie</h3>
+        <p>YES and NO tokens are listed as standard Chia offers on Dexie DEX. Traders exchange XCH for tokens representing their predictions.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">3</div>
+        <h3>Oracle Resolution</h3>
+        <p>When the event occurs, the designated oracle signs the outcome with BLS cryptography. The signature is verifiable by anyone on-chain.</p>
+      </div>
+      <div class="step-card fade-up">
+        <div class="step-num">4</div>
+        <h3>Winner Redemption</h3>
+        <p>Holders of winning tokens present them to redeem XCH from the smart contract. Losing tokens become worthless. No oracle can prevent redemption.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Economics & Transparency -->
+<section id="economics">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">Economics & Transparency</div>
+      <div class="section-title">How The System Works</div>
+      <div class="section-subtitle">Full transparency about fees, risks, and economic mechanisms. We believe in informed participation.</div>
+    </div>
+
+    <div class="economics-grid">
+      <div class="econ-card fade-up">
+        <h3>💰 Revenue Model & Fees</h3>
+        <p>The house makes money through <span class="highlight">trading spreads</span>, not by taking directional bets:</p>
+        <ul>
+          <li><strong>Initial offers:</strong> Posted at 50¢/50¢ (10-20% edge via spread)</li>
+          <li><strong>Market creation:</strong> Currently free during Phase 1</li>
+          <li><strong>Resolution fee:</strong> May implement 5% fee in future versions</li>
+          <li><strong>Trading fees:</strong> Standard Chia transaction fees only</li>
+        </ul>
+        <div class="example">
+          <strong>Example:</strong> 1M token market. House posts offers at 45¢ YES / 45¢ NO. If perfectly balanced, house collects 100k mojos (10%) while providing 900k mojos liquidity.
+        </div>
+      </div>
+
+      <div class="econ-card fade-up">
+        <h3>🧮 Token Economics</h3>
+        <p>Each token represents a <span class="highlight">claim on future XCH</span>:</p>
+        <ul>
+          <li><strong>Token value:</strong> 1 winning token = amount locked ÷ total supply</li>
+          <li><strong>Current markets:</strong> ~1000 mojos per token (at XCH = $3.26)</li>
+          <li><strong>Supply:</strong> Fixed at creation, typically 1M tokens per side</li>
+          <li><strong>Backing:</strong> XCH locked in smart contract equals total supply</li>
+        </ul>
+        <div class="example">
+          <strong>Calculation:</strong> If you buy 1000 YES tokens at 500 mojos each (cost: 0.5 XCH) and YES wins, you redeem for ~1000 mojos total. Profit depends on outcome probability vs price paid.
+        </div>
+      </div>
+
+      <div class="econ-card fade-up">
+        <h3>⚠️ Risk Disclosure</h3>
+        <p>Understand the risks before participating:</p>
+        <ul>
+          <li><strong>Oracle trust:</strong> Single trusted oracle can resolve incorrectly (Phase 1 limitation)</li>
+          <li><strong>Smart contract risk:</strong> Bugs in Rue puzzle could lock funds</li>
+          <li><strong>Market risk:</strong> Prices can be wrong; you can lose 100% of investment</li>
+          <li><strong>Liquidity risk:</strong> Limited trading volume on some markets</li>
+        </ul>
+        <div class="warning">
+          <strong>Phase 1 Reality:</strong> If oracle disappears or refuses to resolve, funds could be locked forever in v1 puzzles. v2 puzzles have timeout recovery mechanisms.
+        </div>
+      </div>
+
+      <div class="econ-card fade-up">
+        <h3>🔍 On-Chain Verification</h3>
+        <p>Every claim is <span class="highlight">verifiable on Chia's blockchain</span>:</p>
+        <ul>
+          <li><strong>Market creation:</strong> CAT minting transactions on Spacescan</li>
+          <li><strong>Fund locking:</strong> XCH deposits to puzzle addresses</li>
+          <li><strong>Oracle signatures:</strong> BLS signatures in spend bundles</li>
+          <li><strong>Redemptions:</strong> Winning token burns + XCH payouts</li>
+        </ul>
+        <p>Check any market's verification links below for complete transaction history. No trust required beyond reading the blockchain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Protocol Architecture -->
+<section id="architecture">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">Protocol Architecture</div>
+      <div class="section-title">Built Different</div>
+      <div class="section-subtitle">Chia's coin-set model enables prediction markets with properties impossible on account-based chains.</div>
+    </div>
+    <div class="arch-grid">
+      <div class="arch-card fade-up">
+        <div class="arch-icon purple">⚡</div>
+        <h3>Rue Smart Contracts</h3>
+        <p>Market logic compiled in Rue, Chia's high-level language. Each puzzle validates oracle signatures and controls XCH redemption. Deterministic and auditable.</p>
+      </div>
+      <div class="arch-card fade-up">
+        <div class="arch-icon blue">🔗</div>
+        <h3>CAT Token Standards</h3>
+        <p>YES/NO positions are standard Chia Asset Tokens (CATs) with single-issuance TAILs. Freely tradeable on any Chia DEX without special integration.</p>
+      </div>
+      <div class="arch-card fade-up">
+        <div class="arch-icon green">🔐</div>
+        <h3>BLS Signature Oracles</h3>
+        <p>Oracle resolution uses BLS signatures over market_id + outcome. Signatures are validated by the puzzle itself, not external contracts. Replay-resistant.</p>
+      </div>
+    </div>
+
+    <!-- Trust Model -->
+    <div id="trust" class="trust-model fade-up">
+      <h3>🛡️ Trust Model Evolution</h3>
+      <p>We're honest about our current trust assumptions and roadmap toward decentralization:</p>
+      
+      <div class="trust-phases">
+        <div class="phase current">
+          <div class="phase-num">1</div>
+          <h4>Phase 1: Trusted Oracle</h4>
+          <p><strong>(Current)</strong> Single oracle operated by ChiaPredict team. Oracle can resolve any outcome. Full on-chain verification of signatures.</p>
+        </div>
+        <div class="phase">
+          <div class="phase-num">2</div>
+          <h4>Phase 2: Multi-Sig Oracle</h4>
+          <p><strong>(Future)</strong> M-of-N community oracle using BLS signature aggregation. Requires consensus of trusted parties to resolve markets.</p>
+        </div>
+        <div class="phase">
+          <div class="phase-num">3</div>
+          <h4>Phase 3: Decentralized Oracle</h4>
+          <p><strong>(Vision)</strong> Stake-based oracle network with slashing conditions. Anyone can participate with economic skin in the game.</p>
+        </div>
+      </div>
+
+      <p style="margin-top: 24px; font-size: 14px; color: var(--text-secondary);">
+        <strong>What the oracle CAN do:</strong> Resolve any outcome, delay resolution indefinitely.<br>
+        <strong>What the oracle CANNOT do:</strong> Steal funds, prevent valid redemptions, change market terms post-creation.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header fade-up" style="text-align:center">
+      <div class="section-label">Frequently Asked Questions</div>
+      <div class="section-title">Everything You Need to Know</div>
+      <div class="section-subtitle" style="margin:0 auto">Common questions about participating, risks, and how the protocol works.</div>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item fade-up" onclick="toggleFAQ(this)">
+        <div class="faq-question">How do I participate in a market?</div>
+        <div class="faq-answer">
+          Visit any market's Dexie links and use a Chia wallet (Sage, Goby) to take offers. You'll exchange XCH for YES or NO tokens representing your prediction. When the market resolves, winning tokens can be redeemed for XCH.
+        </div>
+      </div>
+
+      <div class="faq-item fade-up" onclick="toggleFAQ(this)">
+        <div class="faq-question">What happens if the oracle disappears?</div>
+        <div class="faq-answer">
+          In v1 puzzles, funds could be locked forever. In v2 puzzles, there's a timeout mechanism that allows the market creator to reclaim funds after a specified block height. This is why we're evolving toward multi-sig and decentralized oracles.
+        </div>
+      </div>
+
+      <div class="faq-item fade-up" onclick="toggleFAQ(this)">
+        <div class="faq-question">How are market outcomes determined?</div>
+        <div class="faq-answer">
+          Currently, the ChiaPredict team acts as the oracle and resolves markets based on publicly verifiable facts. We commit to honest resolution based on objective criteria. Future versions will use community consensus or automated data feeds.
+        </div>
+      </div>
+
+      <div class="faq-item fade-up" onclick="toggleFAQ(this)">
+        <div class="faq-question">Can I verify everything on-chain?</div>
+        <div class="faq-answer">
+          Yes! Every market has verification links to Spacescan showing: CAT creation transactions, XCH locked in puzzles, oracle signatures in resolution spends, and redemption transactions. The entire lifecycle is transparent.
+        </div>
+      </div>
+
+      <div class="faq-item fade-up" onclick="toggleFAQ(this)">
+        <div class="faq-question">What are the fees?</div>
+        <div class="faq-answer">
+          Currently no market creation fees. Trading only costs standard Chia transaction fees. The house makes money through trading spreads (difference between initial YES/NO offer prices). Future versions may add small resolution fees.
+        </div>
+      </div>
+
+      <div class="faq-item fade-up" onclick="toggleFAQ(this)">
+        <div class="faq-question">Why Chia instead of Ethereum?</div>
+        <div class="faq-answer">
+          Chia's UTXO model eliminates MEV/front-running, has no public mempool, and costs pennies in fees. BLS signatures enable efficient oracle aggregation. The coin-set model makes prediction markets naturally isolated and composable.
+        </div>
+      </div>
+
+      <div class="faq-item fade-up" onclick="toggleFAQ(this)">
+        <div class="faq-question">How do I know the smart contracts are safe?</div>
+        <div class="faq-answer">
+          All Rue puzzle code is open source. The logic is auditable: oracle signature validation, token verification, and XCH redemption. However, smart contract risk exists - bugs could lock funds. Start with small amounts until you're comfortable.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>ChiaPredict</h3>
+        <p>Building the future of prediction markets on Chia. Open source, verifiable, and evolving toward true decentralization.</p>
+        <div class="footer-version">Protocol v1.0 | Rue Puzzles | Phase 1</div>
+      </div>
+      
+      <div class="footer-links">
+        <h4>Protocol</h4>
+        <ul>
+          <li><a href="https://git.dracattus.com/dracattus/chia-predict" target="_blank">Source Code</a></li>
+          <li><a href="https://git.dracattus.com/dracattus/chia-predict/src/branch/main/docs/PROTOCOL.md" target="_blank">Protocol Docs</a></li>
+          <li><a href="https://git.dracattus.com/dracattus/chia-predict/src/branch/main/docs/AUDIT_REPORT.md" target="_blank">Audit Report</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-links">
+        <h4>Trading</h4>
+        <ul>
+          <li><a href="https://dexie.space" target="_blank">Dexie DEX</a></li>
+          <li><a href="#markets">Active Markets</a></li>
+          <li><a href="#economics">Fee Structure</a></li>
+          <li><a href="#faq">How to Trade</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-links">
+        <h4>Ecosystem</h4>
+        <ul>
+          <li><a href="https://chia.net" target="_blank">Chia Network</a></li>
+          <li><a href="https://spacescan.io" target="_blank">Spacescan Explorer</a></li>
+          <li><a href="https://rue-lang.org" target="_blank">Rue Language</a></li>
+          <li><a href="https://chialisp.com" target="_blank">Chialisp Docs</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 ChiaPredict. Prediction markets with transparency.</div>
+      <div class="footer-legal">
+        <a href="#disclaimer">Risk Disclaimer</a>
+        <a href="#terms">Terms of Use</a>
+        <a href="#privacy">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Market Configuration ──
+const MARKETS = [
+  // ── Active Markets ──
+  {
+    id: "03a170514caa4c13",
+    question: "Will Jesus build the next big thing?",
+    status: "active",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "865fe34ca86a6ac929afbc8bf36b013fdf04550ec7c697ba0915fb5f0ca0dbb6",
+    noAsset: "edd3de3ecc79460510a91724370f7eba56f4d04b4f9475d77fcef1fdb8e8f912",
+    puzzleAddress: "xch1nw0kh40h6ud0e4kymqgruy5mlx3tjkfj9txgepx04cz8dvjdmhms4drxf2",
+    yesDexie: "9WDm7Q7Y2E9yDgx5B2sipoN3R7XEFdHJK7GdWv6nECbz",
+    noDexie: "G6BhSHrFjzej84oEoz76dA4M9CdJo1Vv9p1HtRPfPTNy",
+    version: "v1"
+  },
+  {
+    id: "5949264ef9471137",
+    question: "Will Bitcoin hit 150k by December 2026?",
+    status: "active",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "9922c7942736e25d475ba951755df262b5addca4200e80a756a73fab0355cc4d",
+    noAsset: "1649ff1b0c5e7e5e25d999cd48a5247e2eaba45571b4880df71b88ff18cec897",
+    puzzleAddress: "xch12cqhcdzt4un96nmvwuy9gddteplcd2t6mlzuyta0ukamuvzrxmzqa6pset",
+    yesDexie: "Aa2HQcextjHo3YtQrC5zALAjJZSsqL16Ug1GpvzHgbvT",
+    noDexie: "D6FCqXcYRP8ELPHzUsmkLHVy6W9nfyGfcibaBU3yU2K6",
+    version: "v2"
+  },
+  {
+    id: "a140ffcf9d403d60",
+    question: "Will Chia XCH reach $50 by June 2026?",
+    status: "active",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "d169e699baeb7c18d66e08b02e1d3e562494519e57dd105052cd7459477f1765",
+    noAsset: "1e87df1f8165207839a1dc4ad4e37fc100424d8842995aa736876c75358538c8",
+    puzzleAddress: "xch1yusx20qznwmfssptuukufs38gmsa790j7pa9xp5244um3pxn2jzq2mgrhx",
+    version: "v1"
+  },
+  {
+    id: "336c36c5cb17066c",
+    question: "Will the temperature tomorrow in Moncton NB Canada break a high of 15°C?",
+    status: "active",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "f1d4b8180e2b21b0d0d3fb978551d58798624694b6144f38c7049161054407d9",
+    noAsset: "342cb251a3c946db570e61db0d0418ef68201889f0a7635d08d24571f2aa69d0",
+    puzzleAddress: "xch1p0pwnfcd7zq7ff0vaqz59fn2z4pp69gk4lqhhgvuqr7mp04yfclskwdr09",
+    yesDexie: "2qoYSq6RLmpr6hVbkcwxnXXPcHhWsj9NUgaSRh6mVLSK",
+    version: "v1"
+  },
+  // ── Test Markets ──
+  {
+    id: "03c04bf46309930f",
+    question: "Test market: Will this resolve YES?",
+    status: "active",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "eb97c9452f1d1f2e274e031d1202229e91d2a0ef381c87525129f3059ee5ffa3",
+    noAsset: "f6be6021fe768dafef67485f741b452a0f0367f183d994b3a7e65a4c5ef83d8c",
+    puzzleAddress: "xch156dlqrxcw29e4pcylx6s6af3uhq7hzeejr3wvvmqv622v6p06daq9j74ma",
+    yesDexie: "9CowhapRauZKnC7edTJvxS3CzWQw2nvMSxgpJq5jBN3N",
+    noDexie: "DSCAcFKRWMxDSCkwJngGAksDcrLBfC2NRmGD4pWEkjv6",
+    version: "v1",
+    isTest: true
+  },
+  // ── Resolved Markets ──
+  {
+    id: "6f1fd0121504f874",
+    question: "Will ETH flip BTC market cap by 2027?",
+    status: "resolved",
+    outcome: "NO",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "a528edb12acc9054",
+    noAsset: "",
+    puzzleAddress: "",
+    yesDexie: "4GNR5FHQqfkPJCumJGHG",
+    version: "v1"
+  },
+  {
+    id: "172086c8d7b079be",
+    question: "E2E Test: Will this resolve YES?",
+    resolution: "Resolved Feb 10, 2026 — Block 8,298,750",
+    status: "resolved",
+    outcome: "YES",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "9fbbd2f184a64fab49ca834015d4b6b537403d16057dd15202c4926eca8de699",
+    noAsset: "04371e4452c23113cee4263a82bc73b29dd7e7b9052b9d95b90bb5835b5bc68e",
+    puzzleAddress: "xch150z3g2arsnyw5t4l28sp2ptz7q0sct7mx3tdctmpm2jrj0nnqxyqjn8yj7",
+    redeemDexie: "CpmNiCqeCL5ZRH8jQUvLcHu6An2496JK9DWfnfcZVZFF",
+    redeemUrl: "https://dexie.space/offers/CpmNiCqeCL5ZRH8jQUvLcHu6An2496JK9DWfnfcZVZFF",
+    version: "v2",
+    isTest: true,
+    note: "First complete E2E buyer lifecycle — created, traded, resolved, redeemed"
+  }
+];
+
+// ── Render Markets ──
+function renderMarkets() {
+  const activeGrid = document.getElementById('active-markets-grid');
+  const pastGrid = document.getElementById('past-markets-grid');
+  
+  const activeMarkets = MARKETS.filter(m => m.status === 'active');
+  const pastMarkets = MARKETS.filter(m => m.status === 'resolved');
+  
+  activeGrid.innerHTML = activeMarkets.map((m, i) => renderActiveMarket(m, i)).join('');
+  pastGrid.innerHTML = pastMarkets.map((m, i) => renderPastMarket(m, i + activeMarkets.length)).join('');
+
+  // Re-observe fade-ups
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Fetch live prices for active markets
+  activeMarkets.forEach((m, i) => {
+    if (m.yesDexie && !m.isTest) {
+      setTimeout(() => fetchPrices(m, i), i * 200); // Stagger requests
+    }
+  });
+}
+
+function renderActiveMarket(m, i) {
+  const badges = [];
+  badges.push('<span class="badge badge-active">● Active</span>');
+  if (m.isTest) badges.push('<span class="badge badge-test">Test</span>');
+  
+  const warning = m.warning ? `<div style="margin-top: 12px; padding: 12px; background: var(--red-dim); border-radius: 8px; font-size: 13px; color: var(--red);">${m.warning}</div>` : '';
+  
+  return `
+    <div class="market-card fade-up" id="market-${i}">
+      <div class="market-header">
+        <div class="market-question">${m.question}</div>
+        <div>${badges.join('')}</div>
+      </div>
+      <div class="prob-bar-wrap">
+        <div class="prob-labels">
+          <span class="prob-yes" id="label-yes-${i}">YES 50%</span>
+          <span class="prob-no" id="label-no-${i}">NO 50%</span>
+        </div>
+        <div class="prob-bar">
+          <div class="yes-fill" id="bar-yes-${i}" style="width:50%">50%</div>
+          <div class="no-fill" id="bar-no-${i}">50%</div>
+        </div>
+      </div>
+      <div class="market-meta">
+        <div class="meta-item">
+          <dt>Resolution</dt>
+          <dd>${m.resolution}</dd>
+        </div>
+        <div class="meta-item supply">
+          <dt>Supply per side</dt>
+          <dd>${m.supply.toLocaleString()} tokens</dd>
+        </div>
+        <div class="meta-item oracle">
+          <dt>Oracle</dt>
+          <dd>${m.oracle}</dd>
+        </div>
+        <div class="meta-item">
+          <dt>Version</dt>
+          <dd>${m.version}</dd>
+        </div>
+      </div>
+      <div class="market-actions">
+        <a href="https://dexie.space/offers/${m.yesDexie}" target="_blank" class="btn-trade btn-yes">
+          Buy YES →
+        </a>
+        <a href="https://dexie.space/offers/${m.noDexie}" target="_blank" class="btn-trade btn-no">
+          Buy NO →
+        </a>
+      </div>
+      <div class="verification-links">
+        <a href="https://spacescan.io/address/${m.puzzleAddress}" target="_blank">Puzzle Address</a>
+        <a href="https://spacescan.io/cat/${m.yesAsset}" target="_blank">YES CAT</a>
+        <a href="https://spacescan.io/cat/${m.noAsset}" target="_blank">NO CAT</a>
+      </div>
+      ${warning}
+      <div class="live-note" id="note-${i}"></div>
+    </div>`;
+}
+
+function renderPastMarket(m, i) {
+  const outcome = m.outcome === 'YES' ? '✅ YES' : '❌ NO';
+  const winnerClass = m.outcome === 'YES' ? 'yes-winner' : 'no-winner';
+  const note = m.note ? `<div style="margin-top: 12px; font-style: italic; font-size: 12px; color: var(--text-muted);">${m.note}</div>` : '';
+  
+  return `
+    <div class="market-card resolved fade-up" id="market-${i}">
+      <div class="market-header">
+        <div class="market-question">${m.question}</div>
+        <span class="badge badge-resolved">✓ Resolved</span>
+      </div>
+      <div class="prob-bar-wrap">
+        <div class="resolved-bar ${winnerClass}">
+          ${outcome} Wins — Settled On-Chain
+        </div>
+      </div>
+      <div class="market-meta">
+        <div class="meta-item">
+          <dt>Outcome</dt>
+          <dd style="color:var(--gold)">${outcome}</dd>
+        </div>
+        <div class="meta-item supply">
+          <dt>Supply per side</dt>
+          <dd>${m.supply.toLocaleString()} tokens</dd>
+        </div>
+        <div class="meta-item oracle">
+          <dt>Oracle</dt>
+          <dd>${m.oracle}</dd>
+        </div>
+        <div class="meta-item">
+          <dt>Settlement</dt>
+          <dd>On-chain</dd>
+        </div>
+      </div>
+      <div class="market-actions">
+        ${m.redeemUrl ? `<a href="${m.redeemUrl}" target="_blank" class="btn-trade btn-yes">Redeem Winnings ↗</a>` : ''}
+        ${m.yesDexie ? `<a href="https://dexie.space/offers/${m.yesDexie}" target="_blank" class="btn-trade btn-resolved">View History on Dexie ↗</a>` : ''}
+      </div>
+      <div class="verification-links">
+        <a href="https://spacescan.io/address/${m.puzzleAddress}" target="_blank">Puzzle Address</a>
+        <a href="https://spacescan.io/cat/${m.yesAsset}" target="_blank">YES CAT</a>
+        <a href="https://spacescan.io/cat/${m.noAsset}" target="_blank">NO CAT</a>
+      </div>
+      ${note}
+    </div>`;
+}
+
+// ── Fetch Live Prices from Dexie ──
+async function fetchPrices(market, idx) {
+  const noteEl = document.getElementById(`note-${idx}`);
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    
+    const res = await fetch(`https://dexie.space/v1/offers/${market.yesDexie}`, {
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    // Parse offer data for price calculation
+    if (data.offer && data.offer.offered && data.offer.requested) {
+      const offered = data.offer.offered;
+      const requested = data.offer.requested;
+      
+      let xchAmount = 0, tokenAmount = 0;
+      
+      // Find XCH offered and tokens requested
+      for (const item of offered) {
+        if (!item.asset_id || item.asset_id === 'xch' || item.asset_id === '') {
+          xchAmount += parseInt(item.amount);
+        }
+      }
+      for (const item of requested) {
+        if (item.asset_id === market.yesAsset) {
+          tokenAmount += parseInt(item.amount);
+        }
+      }
+
+      if (xchAmount > 0 && tokenAmount > 0) {
+        // Calculate implied probability
+        // Price per token in mojos = xchAmount / tokenAmount  
+        // If 1000 tokens cost 500 mojos, each token costs 0.5 mojos
+        // This implies YES probability ≈ 50% if fair value is 1 mojo per token
+        const pricePerToken = xchAmount / tokenAmount;
+        const impliedProb = Math.min(Math.max(Math.round(pricePerToken * 1000), 5), 95); // Assume 1000 mojos = 100%
+        const noProb = 100 - impliedProb;
+        
+        animateBar(idx, impliedProb, noProb);
+        updateTimestamp();
+        
+        if (noteEl) {
+          noteEl.innerHTML = `📡 Live price: ${pricePerToken.toFixed(1)} mojos per token • <a href="https://dexie.space/offers/${market.yesDexie}" target="_blank">View on Dexie</a>`;
+        }
+        return;
+      }
+    }
+
+    throw new Error('Could not parse offer data');
+  } catch (e) {
+    // CORS or network error — show fallback
+    if (noteEl) {
+      noteEl.innerHTML = `📊 <a href="https://dexie.space/offers/${market.yesDexie}" target="_blank">Live prices on Dexie →</a>`;
+    }
+  }
+}
+
+// ── Animate probability bar ──
+function animateBar(idx, yesPct, noPct) {
+  const yesBar = document.getElementById(`bar-yes-${idx}`);
+  const noBar = document.getElementById(`bar-no-${idx}`);
+  const yesLabel = document.getElementById(`label-yes-${idx}`);
+  const noLabel = document.getElementById(`label-no-${idx}`);
+
+  if (yesBar) {
+    yesBar.style.width = yesPct + '%';
+    yesBar.textContent = yesPct + '%';
+  }
+  if (noBar) noBar.textContent = noPct + '%';
+  if (yesLabel) yesLabel.textContent = `YES ${yesPct}%`;
+  if (noLabel) noLabel.textContent = `NO ${noPct}%`;
+}
+
+// ── Mobile menu toggle ──
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  menu.classList.toggle('show');
+}
+
+// ── FAQ Toggle ──
+function toggleFAQ(element) {
+  element.classList.toggle('open');
+}
+
+// ── Timestamp ──
+function updateTimestamp() {
+  const el = document.getElementById('last-updated');
+  if (el) {
+    const now = new Date();
+    el.textContent = `Last updated: ${now.toLocaleTimeString()} ${now.toLocaleDateString()}`;
+  }
+}
+
+// ── Animated counters ──
+function animateCounters() {
+  document.querySelectorAll('.counter').forEach(el => {
+    const target = parseInt(el.getAttribute('data-target'));
+    const duration = 2000; // 2 seconds
+    const step = target / (duration / 16); // 60fps
+    let current = 0;
+    
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      
+      if (target > 1000000) {
+        el.textContent = (current / 1000000).toFixed(1) + 'M';
+      } else {
+        el.textContent = Math.floor(current).toLocaleString();
+      }
+    }, 16);
+  });
+}
+
+// ── Fade-in observer ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { 
+      e.target.classList.add('visible'); 
+      observer.unobserve(e.target); 
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+// ── Auto-refresh prices ──
+function startPriceRefresh() {
+  setInterval(() => {
+    const activeMarkets = MARKETS.filter(m => m.status === 'active' && !m.isTest && m.yesDexie);
+    activeMarkets.forEach((m, i) => {
+      fetchPrices(m, i);
+    });
+  }, 60000); // Refresh every 60 seconds
+}
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', () => {
+  // Observe all fade-up elements
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  
+  // Render markets
+  renderMarkets();
+  
+  // Start animated counters after a brief delay
+  setTimeout(animateCounters, 500);
+  
+  // Start price refresh cycle  
+  setTimeout(startPriceRefresh, 5000);
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('mobile-menu');
+    const toggle = document.querySelector('.mobile-toggle');
+    if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+      menu.classList.remove('show');
+    }
+  });
+});
+</script>
+
+</body>
+</html>

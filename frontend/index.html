@@ -829,7 +829,85 @@ footer {
 <script>
 // ── Market Configuration ──
 const MARKETS = [
-  // Resolved Markets
+  // ── Active Markets ──
+  {
+    id: "03a170514caa4c13",
+    question: "Will Jesus build the next big thing?",
+    status: "active",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "865fe34ca86a6ac929afbc8bf36b013fdf04550ec7c697ba0915fb5f0ca0dbb6",
+    noAsset: "edd3de3ecc79460510a91724370f7eba56f4d04b4f9475d77fcef1fdb8e8f912",
+    puzzleAddress: "xch1nw0kh40h6ud0e4kymqgruy5mlx3tjkfj9txgepx04cz8dvjdmhms4drxf2",
+    yesDexie: "9WDm7Q7Y2E9yDgx5B2sipoN3R7XEFdHJK7GdWv6nECbz",
+    noDexie: "G6BhSHrFjzej84oEoz76dA4M9CdJo1Vv9p1HtRPfPTNy",
+    version: "v1"
+  },
+  {
+    id: "5949264ef9471137",
+    question: "Will Bitcoin hit 150k by December 2026?",
+    status: "active",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "9922c7942736e25d475ba951755df262b5addca4200e80a756a73fab0355cc4d",
+    noAsset: "1649ff1b0c5e7e5e25d999cd48a5247e2eaba45571b4880df71b88ff18cec897",
+    puzzleAddress: "xch12cqhcdzt4un96nmvwuy9gddteplcd2t6mlzuyta0ukamuvzrxmzqa6pset",
+    yesDexie: "Aa2HQcextjHo3YtQrC5zALAjJZSsqL16Ug1GpvzHgbvT",
+    noDexie: "D6FCqXcYRP8ELPHzUsmkLHVy6W9nfyGfcibaBU3yU2K6",
+    version: "v2"
+  },
+  {
+    id: "a140ffcf9d403d60",
+    question: "Will Chia XCH reach $50 by June 2026?",
+    status: "active",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "d169e699baeb7c18d66e08b02e1d3e562494519e57dd105052cd7459477f1765",
+    noAsset: "1e87df1f8165207839a1dc4ad4e37fc100424d8842995aa736876c75358538c8",
+    puzzleAddress: "xch1yusx20qznwmfssptuukufs38gmsa790j7pa9xp5244um3pxn2jzq2mgrhx",
+    version: "v1"
+  },
+  {
+    id: "336c36c5cb17066c",
+    question: "Will the temperature tomorrow in Moncton NB Canada break a high of 15°C?",
+    status: "active",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "f1d4b8180e2b21b0d0d3fb978551d58798624694b6144f38c7049161054407d9",
+    noAsset: "342cb251a3c946db570e61db0d0418ef68201889f0a7635d08d24571f2aa69d0",
+    puzzleAddress: "xch1p0pwnfcd7zq7ff0vaqz59fn2z4pp69gk4lqhhgvuqr7mp04yfclskwdr09",
+    yesDexie: "2qoYSq6RLmpr6hVbkcwxnXXPcHhWsj9NUgaSRh6mVLSK",
+    version: "v1"
+  },
+  // ── Test Markets ──
+  {
+    id: "03c04bf46309930f",
+    question: "Test market: Will this resolve YES?",
+    status: "active",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "eb97c9452f1d1f2e274e031d1202229e91d2a0ef381c87525129f3059ee5ffa3",
+    noAsset: "f6be6021fe768dafef67485f741b452a0f0367f183d994b3a7e65a4c5ef83d8c",
+    puzzleAddress: "xch156dlqrxcw29e4pcylx6s6af3uhq7hzeejr3wvvmqv622v6p06daq9j74ma",
+    yesDexie: "9CowhapRauZKnC7edTJvxS3CzWQw2nvMSxgpJq5jBN3N",
+    noDexie: "DSCAcFKRWMxDSCkwJngGAksDcrLBfC2NRmGD4pWEkjv6",
+    version: "v1",
+    isTest: true
+  },
+  // ── Resolved Markets ──
+  {
+    id: "6f1fd0121504f874",
+    question: "Will ETH flip BTC market cap by 2027?",
+    status: "resolved",
+    outcome: "NO",
+    oracle: "DracattusDev",
+    supply: 1000,
+    yesAsset: "a528edb12acc9054",
+    noAsset: "",
+    puzzleAddress: "",
+    yesDexie: "4GNR5FHQqfkPJCumJGHG",
+    version: "v1"
+  },
   {
     id: "172086c8d7b079be",
     question: "E2E Test: Will this resolve YES?",

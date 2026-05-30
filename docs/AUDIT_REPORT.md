@@ -103,7 +103,7 @@ ChiaPredict is a working proof-of-concept that has successfully completed end-to
 **Issues:**
 1. **ORACLE SECRET KEY HARDCODED IN SOURCE:**
    ```python
-   ORACLE_SK = "39b72aa8ccc89391c2152927ba9d2733c6ad87f1af946fca26f13bf650a312f2"
+   ORACLE_SK = "<REDACTED_SET_VIA_ENV_ONLY>"
    ```
    **THIS IS A CRITICAL SECURITY ISSUE.** If this repo is ever pushed to a public GitHub, the oracle key is compromised. Even in a private repo, this is unacceptable.
 

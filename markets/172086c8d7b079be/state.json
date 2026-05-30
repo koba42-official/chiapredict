@@ -1,0 +1,66 @@
+{
+  "question": "E2E Test: Will this resolve YES?",
+  "market_id": "172086c8d7b079be419951fe6d4d6dd5cc1c7dabc39bb424bd1706c687db2df5",
+  "phase": "redeemable",
+  "created_at": 1770765382.728009,
+  "puzzle_version": "v2",
+  "oracle": {
+    "name": "DracattusDev",
+    "fingerprint": 1631380421,
+    "pubkey": "873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617"
+  },
+  "mint_wallet": {
+    "fingerprint": 861103475
+  },
+  "yes_cat": {
+    "asset_id": "9fbbd2f184a64fab49ca834015d4b6b537403d16057dd15202c4926eca8de699",
+    "supply": 1000
+  },
+  "no_cat": {
+    "asset_id": "04371e4452c23113cee4263a82bc73b29dd7e7b9052b9d95b90bb5835b5bc68e",
+    "supply": 1000
+  },
+  "puzzle": {
+    "base_clvm": "(a (q 2 (i -65 (q 2 (i (> 95 ()) (q 4 (c (q . 83) (c 95 ())) (c 2 (c (c (q . 51) (c 767 (c 1535 ()))) ()))) (q 8)) 1) (q 2 (i (any (not 383) (= 383 (q . 1))) (q 4 (c (q . 50) (c 5 (c (concat 47 (a (i (= 383 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c 2 (c (c (q . 51) (c 767 (c 1535 (c (c 767 (c (a (i (= 383 (q . 1)) (q . 11) (q . 23)) 1) ())) ())))) ()))) (q 8)) 1)) 1) (c (c (q . 73) (c 767 ())) 1))",
+    "curried_clvm": "(a (q 2 (q 2 (i -65 (q 2 (i (> 95 ()) (q 4 (c (q . 83) (c 95 ())) (c 2 (c (c (q . 51) (c 767 (c 1535 ()))) ()))) (q 8)) 1) (q 2 (i (any (not 383) (= 383 (q . 1))) (q 4 (c (q . 50) (c 5 (c (concat 47 (a (i (= 383 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c 2 (c (c (q . 51) (c 767 (c 1535 (c (c 767 (c (a (i (= 383 (q . 1)) (q . 11) (q . 23)) 1) ())) ())))) ()))) (q 8)) 1)) 1) (c (c (q . 73) (c 767 ())) 1)) (c (q . 0x873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617) (c (q . 0x9fbbd2f184a64fab49ca834015d4b6b537403d16057dd15202c4926eca8de699) (c (q . 0x04371e4452c23113cee4263a82bc73b29dd7e7b9052b9d95b90bb5835b5bc68e) (c (q . 0x172086c8d7b079be419951fe6d4d6dd5cc1c7dabc39bb424bd1706c687db2df5) (c (q . 0x7eb435) 1))))))",
+    "curried_hex": "ff02ffff01ff02ffff01ff02ffff03ff81bfffff01ff02ffff03ffff15ff5fff8080ffff01ff04ffff04ffff0153ffff04ff5fff808080ffff04ff02ffff04ffff04ffff0133ffff04ff8202ffffff04ff8205ffff80808080ff80808080ffff01ff088080ff0180ffff01ff02ffff03ffff21ffff20ff82017f80ffff09ff82017fffff01018080ffff01ff04ffff04ffff0132ffff04ff05ffff04ffff0eff2fffff02ffff03ffff09ff82017fffff010180ffff01ff0101ffff01ff010080ff018080ff80808080ffff04ff02ffff04ffff04ffff0133ffff04ff8202ffffff04ff8205ffffff04ffff04ff8202ffffff04ffff02ffff03ffff09ff82017fffff010180ffff010bffff011780ff0180ff808080ff8080808080ff80808080ffff01ff088080ff018080ff0180ffff04ffff04ffff0149ffff04ff8202ffff808080ff018080ffff04ffff01b0873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617ffff04ffff01a09fbbd2f184a64fab49ca834015d4b6b537403d16057dd15202c4926eca8de699ffff04ffff01a004371e4452c23113cee4263a82bc73b29dd7e7b9052b9d95b90bb5835b5bc68effff04ffff01a0172086c8d7b079be419951fe6d4d6dd5cc1c7dabc39bb424bd1706c687db2df5ffff04ffff01837eb435ff01808080808080",
+    "curried_hash": "a3c5142ba384c8ea2ebf51e0150562f01f0c2fdb3456dc2f61daa4393e730188",
+    "address": "xch150z3g2arsnyw5t4l28sp2ptz7q0sct7mx3tdctmpm2jrj0nnqxyqjn8yj7"
+  },
+  "timeout_blocks": 5000,
+  "absolute_timeout_height": 8303669,
+  "offers": {
+    "yes": {
+      "offer_id": "a0a38a25500ccb28c204788ee14ff03491ca236ad2a60eb9601d32cfff97dd5e",
+      "dexie_id": "hnrsG2u2qo6ymkQsShKZqXxELmJ2rJb9ecp8mxKYJMh",
+      "dexie_url": "https://dexie.space/offers/hnrsG2u2qo6ymkQsShKZqXxELmJ2rJb9ecp8mxKYJMh",
+      "offered": "100 YES",
+      "requested": "50 mojos XCH"
+    },
+    "no": {
+      "offer_id": "89c3fb6ab5397d4d7066da6d64f205f0a626bb00b9a1c67b22db160f49e74376",
+      "dexie_id": "BhcspkNb4W7ELYhbZpUmEZxNKgDBqxL5dgg5iA8SDsBD",
+      "dexie_url": "https://dexie.space/offers/BhcspkNb4W7ELYhbZpUmEZxNKgDBqxL5dgg5iA8SDsBD",
+      "offered": "100 NO",
+      "requested": "50 mojos XCH"
+    }
+  },
+  "genesis_challenge": "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb",
+  "resolution": {
+    "outcome": "YES",
+    "resolved_at": 1770766933.493471,
+    "receiver_ph": "cfa64710f3b571b4aceffd41eb80f56e0da2013a323f5e940ad8ff22a37c44df"
+  },
+  "redemption": {
+    "offers": [
+      {
+        "dexie_url": "https://dexie.space/offers/CpmNiCqeCL5ZRH8jQUvLcHu6An2496JK9DWfnfcZVZFF",
+        "offer_id": "2f07921ff2f76cb444f801dc7a7f48cda881bff3ce396f499aec99706d4fe307",
+        "qty": 100,
+        "price_per_token": 1000,
+        "xch_total": 100000,
+        "created_at": 1770766971.07435
+      }
+    ]
+  }
+}

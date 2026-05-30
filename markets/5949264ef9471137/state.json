@@ -1,0 +1,48 @@
+{
+  "question": "Will Bitcoin hit 150k by December 2026?",
+  "market_id": "5949264ef9471137a1fa3dc132652f9b4bbc734aec2a5c04013f50a8883badd9",
+  "phase": "active",
+  "created_at": 1770756823.9756002,
+  "puzzle_version": "v2",
+  "oracle": {
+    "name": "DracattusDev",
+    "fingerprint": 1631380421,
+    "pubkey": "873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617"
+  },
+  "mint_wallet": {
+    "fingerprint": 861103475
+  },
+  "yes_cat": {
+    "asset_id": "9922c7942736e25d475ba951755df262b5addca4200e80a756a73fab0355cc4d",
+    "supply": 1000000
+  },
+  "no_cat": {
+    "asset_id": "1649ff1b0c5e7e5e25d999cd48a5247e2eaba45571b4880df71b88ff18cec897",
+    "supply": 1000000
+  },
+  "puzzle": {
+    "base_clvm": "(a (q 2 (i -65 (q 2 (i (> 95 ()) (q 4 (c (q . 83) (c 95 ())) (c 2 (c (c (q . 51) (c 767 (c 1535 ()))) ()))) (q 8)) 1) (q 2 (i (any (not 383) (= 383 (q . 1))) (q 4 (c (q . 50) (c 5 (c (concat 47 (a (i (= 383 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c 2 (c (c (q . 51) (c 767 (c 1535 (c (c 767 (c (a (i (= 383 (q . 1)) (q . 11) (q . 23)) 1) ())) ())))) ()))) (q 8)) 1)) 1) (c (c (q . 73) (c 767 ())) 1))",
+    "curried_clvm": "(a (q 2 (q 2 (i -65 (q 2 (i (> 95 ()) (q 4 (c (q . 83) (c 95 ())) (c 2 (c (c (q . 51) (c 767 (c 1535 ()))) ()))) (q 8)) 1) (q 2 (i (any (not 383) (= 383 (q . 1))) (q 4 (c (q . 50) (c 5 (c (concat 47 (a (i (= 383 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c 2 (c (c (q . 51) (c 767 (c 1535 (c (c 767 (c (a (i (= 383 (q . 1)) (q . 11) (q . 23)) 1) ())) ())))) ()))) (q 8)) 1)) 1) (c (c (q . 73) (c 767 ())) 1)) (c (q . 0x873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617) (c (q . 0x9922c7942736e25d475ba951755df262b5addca4200e80a756a73fab0355cc4d) (c (q . 0x1649ff1b0c5e7e5e25d999cd48a5247e2eaba45571b4880df71b88ff18cec897) (c (q . 0x5949264ef9471137a1fa3dc132652f9b4bbc734aec2a5c04013f50a8883badd9) (c (q . 0x0186a0) 1))))))",
+    "curried_hex": "ff02ffff01ff02ffff01ff02ffff03ff81bfffff01ff02ffff03ffff15ff5fff8080ffff01ff04ffff04ffff0153ffff04ff5fff808080ffff04ff02ffff04ffff04ffff0133ffff04ff8202ffffff04ff8205ffff80808080ff80808080ffff01ff088080ff0180ffff01ff02ffff03ffff21ffff20ff82017f80ffff09ff82017fffff01018080ffff01ff04ffff04ffff0132ffff04ff05ffff04ffff0eff2fffff02ffff03ffff09ff82017fffff010180ffff01ff0101ffff01ff010080ff018080ff80808080ffff04ff02ffff04ffff04ffff0133ffff04ff8202ffffff04ff8205ffffff04ffff04ff8202ffffff04ffff02ffff03ffff09ff82017fffff010180ffff010bffff011780ff0180ff808080ff8080808080ff80808080ffff01ff088080ff018080ff0180ffff04ffff04ffff0149ffff04ff8202ffff808080ff018080ffff04ffff01b0873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617ffff04ffff01a09922c7942736e25d475ba951755df262b5addca4200e80a756a73fab0355cc4dffff04ffff01a01649ff1b0c5e7e5e25d999cd48a5247e2eaba45571b4880df71b88ff18cec897ffff04ffff01a05949264ef9471137a1fa3dc132652f9b4bbc734aec2a5c04013f50a8883badd9ffff04ffff01830186a0ff01808080808080",
+    "curried_hash": "56017c344baf265d4f6c77085435abc87f86a97adfc5c22fafe5bbbe304336c4",
+    "address": "xch12cqhcdzt4un96nmvwuy9gddteplcd2t6mlzuyta0ukamuvzrxmzqa6pset"
+  },
+  "timeout_blocks": 100000,
+  "offers": {
+    "yes": {
+      "offer_id": "4bd85168e4c1a085bb617ce7252ec49801bd5ac8fed8f1c9e7a3094ca07d544b",
+      "dexie_id": "Aa2HQcextjHo3YtQrC5znhtLtp9voxhJWwGXKPuytJhH",
+      "dexie_url": "https://dexie.space/offers/Aa2HQcextjHo3YtQrC5znhtLtp9voxhJWwGXKPuytJhH",
+      "offered": "1000 YES",
+      "requested": "500 mojos XCH"
+    },
+    "no": {
+      "offer_id": "14ca443bf43ad0b3da9daca329d04774475a0cb0a1919bc7c711883d79aa4fde",
+      "dexie_id": "D6FCqXcYRP8ELPHzUsmkrFdNfemVV6NSC92Sjui4CQZD",
+      "dexie_url": "https://dexie.space/offers/D6FCqXcYRP8ELPHzUsmkrFdNfemVV6NSC92Sjui4CQZD",
+      "offered": "1000 NO",
+      "requested": "500 mojos XCH"
+    }
+  },
+  "genesis_challenge": "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb"
+}

@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+markets/*/resolve_bundle.json
+tests/round2/
+tests/mainnet_test_state.json
+tests/submit_body.json
+
+# Secrets and local credentials
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+secrets/
+wallet-export*/

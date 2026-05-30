@@ -1,0 +1,49 @@
+{
+  "question": "Will Jesus build the next big thing?",
+  "market_id": "03a170514caa4c1355bab7baa341bf769795e79bfef7ae02e477fe0f1028e610",
+  "phase": "active",
+  "created_at": 1770948288.834336,
+  "puzzle_version": "v1",
+  "oracle": {
+    "name": "DracattusDev",
+    "fingerprint": 1631380421,
+    "pubkey": "873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617"
+  },
+  "mint_wallet": {
+    "fingerprint": 861103475
+  },
+  "yes_cat": {
+    "asset_id": "865fe34ca86a6ac929afbc8bf36b013fdf04550ec7c697ba0915fb5f0ca0dbb6",
+    "supply": 1000000
+  },
+  "no_cat": {
+    "asset_id": "edd3de3ecc79460510a91724370f7eba56f4d04b4f9475d77fcef1fdb8e8f912",
+    "supply": 1000000
+  },
+  "puzzle": {
+    "base_clvm": "(a (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1)",
+    "curried_clvm": "(a (q 2 (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1) (c (q . 0x873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617) (c (q . 0x865fe34ca86a6ac929afbc8bf36b013fdf04550ec7c697ba0915fb5f0ca0dbb6) (c (q . 0xedd3de3ecc79460510a91724370f7eba56f4d04b4f9475d77fcef1fdb8e8f912) (c (q . 0x03a170514caa4c1355bab7baa341bf769795e79bfef7ae02e477fe0f1028e610) 1)))))",
+    "curried_hex": "ff02ffff01ff02ffff03ffff21ffff20ff2f80ffff09ff2fffff01018080ffff01ff04ffff04ffff0132ffff04ff02ffff04ffff0eff17ffff02ffff03ffff09ff2fffff010180ffff01ff0101ffff01ff010080ff018080ff80808080ffff04ffff04ffff0149ffff04ff81bfff808080ffff04ffff04ffff0133ffff04ff5fffff04ff81bfffff04ffff04ff5fffff04ffff02ffff03ffff09ff2fffff010180ffff0105ffff010b80ff0180ff808080ff8080808080ff80808080ffff01ff088080ff0180ffff04ffff01b0873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617ffff04ffff01a0865fe34ca86a6ac929afbc8bf36b013fdf04550ec7c697ba0915fb5f0ca0dbb6ffff04ffff01a0edd3de3ecc79460510a91724370f7eba56f4d04b4f9475d77fcef1fdb8e8f912ffff04ffff01a003a170514caa4c1355bab7baa341bf769795e79bfef7ae02e477fe0f1028e610ff018080808080",
+    "curried_hash": "9b9f6bd5f7d71afcd6c4d8103e129bf9a2b959322acc8c84cfae0476b24dddf7",
+    "address": "xch1nw0kh40h6ud0e4kymqgruy5mlx3tjkfj9txgepx04cz8dvjdmhms4drxf2"
+  },
+  "timeout_blocks": 0,
+  "absolute_timeout_height": null,
+  "offers": {
+    "yes": {
+      "offer_id": "17cbb902edc3ef6f516cca74dbe47e9e18efa12588b24736b629ed930e9e1cff",
+      "dexie_id": "9WDm7Q7Y2E9yDgx5B2sipoN3R7XEFdHJK7GdWv6nECbz",
+      "dexie_url": "https://dexie.space/offers/9WDm7Q7Y2E9yDgx5B2sipoN3R7XEFdHJK7GdWv6nECbz",
+      "offered": "1000 YES",
+      "requested": "500 mojos XCH"
+    },
+    "no": {
+      "offer_id": "69250b3d21810f0b087225d8ff0a5cfa45fe3f87f7efc648821ff67c337018b6",
+      "dexie_id": "G6BhSHrFjzej84oEoz76dA4M9CdJo1Vv9p1HtRPfPTNy",
+      "dexie_url": "https://dexie.space/offers/G6BhSHrFjzej84oEoz76dA4M9CdJo1Vv9p1HtRPfPTNy",
+      "offered": "1000 NO",
+      "requested": "500 mojos XCH"
+    }
+  },
+  "genesis_challenge": "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb"
+}

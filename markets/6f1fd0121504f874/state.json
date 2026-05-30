@@ -1,0 +1,41 @@
+{
+  "question": "Will ETH flip BTC market cap by 2027?",
+  "market_id": "6f1fd0121504f874c5f3e54907b3968c8a18cb45018c806b51b81f14913da0d8",
+  "phase": "resolved",
+  "created_at": 1770746348.002657,
+  "oracle": {
+    "name": "DracattusDev",
+    "fingerprint": 1631380421,
+    "pubkey": "873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617"
+  },
+  "yes_cat": {
+    "asset_id": "19c5da823b815bdc1da91518922dec6fd41f88d7d5aad8d53fd429ce9d42db80",
+    "supply": 100000
+  },
+  "no_cat": {
+    "asset_id": "17e4ca5cb8c5df36faf2de120ebef79295dff415ebd118d60f257284d9e93685",
+    "supply": 100000
+  },
+  "puzzle": {
+    "base_clvm": "(a (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1)",
+    "curried_clvm": "(a (q 2 (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1) (c (q . 0x873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617) (c (q . 0x19c5da823b815bdc1da91518922dec6fd41f88d7d5aad8d53fd429ce9d42db80) (c (q . 0x17e4ca5cb8c5df36faf2de120ebef79295dff415ebd118d60f257284d9e93685) (c (q . 0x6f1fd0121504f874c5f3e54907b3968c8a18cb45018c806b51b81f14913da0d8) 1)))))",
+    "curried_hex": "ff02ffff01ff02ffff03ffff21ffff20ff2f80ffff09ff2fffff01018080ffff01ff04ffff04ffff0132ffff04ff02ffff04ffff0eff17ffff02ffff03ffff09ff2fffff010180ffff01ff0101ffff01ff010080ff018080ff80808080ffff04ffff04ffff0149ffff04ff81bfff808080ffff04ffff04ffff0133ffff04ff5fffff04ff81bfffff04ffff04ff5fffff04ffff02ffff03ffff09ff2fffff010180ffff0105ffff010b80ff0180ff808080ff8080808080ff80808080ffff01ff088080ff0180ffff04ffff01b0873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617ffff04ffff01a019c5da823b815bdc1da91518922dec6fd41f88d7d5aad8d53fd429ce9d42db80ffff04ffff01a017e4ca5cb8c5df36faf2de120ebef79295dff415ebd118d60f257284d9e93685ffff04ffff01a06f1fd0121504f874c5f3e54907b3968c8a18cb45018c806b51b81f14913da0d8ff018080808080",
+    "curried_hash": "950ded196d664ff1270fb84df3bd23e2397974a53df9e2fb048adb2f9de9cd2c",
+    "address": "xch1j5x76xtdve8lzfc0hpxl80fruguhja998hu797cy3tdjl80fe5kq782uu7"
+  },
+  "offers": {
+    "yes": {
+      "offer_id": "f2380e7e27f9702e3db914571092628f8aa7cd54fd5a7fde5af79b658216d407",
+      "dexie_id": "4GNR5FHQqfkPJCumJGHG5LSYHjUdz3zqCASLmzat9X8A",
+      "dexie_url": "https://dexie.space/offers/4GNR5FHQqfkPJCumJGHG5LSYHjUdz3zqCASLmzat9X8A",
+      "offered": "500 YES",
+      "requested": "250 mojos XCH"
+    }
+  },
+  "genesis_challenge": "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb",
+  "resolution": {
+    "outcome": "YES",
+    "resolved_at": 1770746612.461511,
+    "receiver_ph": "cfa64710f3b571b4aceffd41eb80f56e0da2013a323f5e940ad8ff22a37c44df"
+  }
+}

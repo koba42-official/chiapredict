@@ -1,0 +1,48 @@
+{
+  "question": "Test market: Will this resolve YES?",
+  "market_id": "03c04bf46309930fb4be20df383055bd1a45d08dbd39e2f19ed5bb4b3de01a99",
+  "phase": "active",
+  "created_at": 1770758065.337045,
+  "puzzle_version": "v1",
+  "oracle": {
+    "name": "DracattusDev",
+    "fingerprint": 1631380421,
+    "pubkey": "873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617"
+  },
+  "mint_wallet": {
+    "fingerprint": 861103475
+  },
+  "yes_cat": {
+    "asset_id": "eb97c9452f1d1f2e274e031d1202229e91d2a0ef381c87525129f3059ee5ffa3",
+    "supply": 1000
+  },
+  "no_cat": {
+    "asset_id": "f6be6021fe768dafef67485f741b452a0f0367f183d994b3a7e65a4c5ef83d8c",
+    "supply": 1000
+  },
+  "puzzle": {
+    "base_clvm": "(a (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1)",
+    "curried_clvm": "(a (q 2 (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 50) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1) (c (q . 0x873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617) (c (q . 0xeb97c9452f1d1f2e274e031d1202229e91d2a0ef381c87525129f3059ee5ffa3) (c (q . 0xf6be6021fe768dafef67485f741b452a0f0367f183d994b3a7e65a4c5ef83d8c) (c (q . 0x03c04bf46309930fb4be20df383055bd1a45d08dbd39e2f19ed5bb4b3de01a99) 1)))))",
+    "curried_hex": "ff02ffff01ff02ffff03ffff21ffff20ff2f80ffff09ff2fffff01018080ffff01ff04ffff04ffff0132ffff04ff02ffff04ffff0eff17ffff02ffff03ffff09ff2fffff010180ffff01ff0101ffff01ff010080ff018080ff80808080ffff04ffff04ffff0149ffff04ff81bfff808080ffff04ffff04ffff0133ffff04ff5fffff04ff81bfffff04ffff04ff5fffff04ffff02ffff03ffff09ff2fffff010180ffff0105ffff010b80ff0180ff808080ff8080808080ff80808080ffff01ff088080ff0180ffff04ffff01b0873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617ffff04ffff01a0eb97c9452f1d1f2e274e031d1202229e91d2a0ef381c87525129f3059ee5ffa3ffff04ffff01a0f6be6021fe768dafef67485f741b452a0f0367f183d994b3a7e65a4c5ef83d8cffff04ffff01a003c04bf46309930fb4be20df383055bd1a45d08dbd39e2f19ed5bb4b3de01a99ff018080808080",
+    "curried_hash": "a69bf00cd8728b9a8704f9b50d7531e5c1eb8b3990e2e633606694a6682fd37a",
+    "address": "xch156dlqrxcw29e4pcylx6s6af3uhq7hzeejr3wvvmqv622v6p06daq9j74ma"
+  },
+  "timeout_blocks": 0,
+  "offers": {
+    "yes": {
+      "offer_id": "bab1afccd2c560cd8333dcfcca41b25288ae46610ed96693b910417d6c5a1c86",
+      "dexie_id": "9CowhapRauZKnC7edTJvCNuNicYJMJcrJPR4bS99MCuF",
+      "dexie_url": "https://dexie.space/offers/9CowhapRauZKnC7edTJvCNuNicYJMJcrJPR4bS99MCuF",
+      "offered": "100 YES",
+      "requested": "50 mojos XCH"
+    },
+    "no": {
+      "offer_id": "ba6759efa6903669f792689393bca731582b9e1ca7cbfb9eb0b9b19575f241f5",
+      "dexie_id": "DSCAcFKRWMxDSCkwJngGfTv3DBzKaJsddL4dP6vZVVVh",
+      "dexie_url": "https://dexie.space/offers/DSCAcFKRWMxDSCkwJngGfTv3DBzKaJsddL4dP6vZVVVh",
+      "offered": "100 NO",
+      "requested": "50 mojos XCH"
+    }
+  },
+  "genesis_challenge": "ccd5bb71183532bff220ba46c268991a3ff07eb358e8255a65c30a2dce0e5fbb"
+}

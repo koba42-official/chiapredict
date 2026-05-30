@@ -1,0 +1,113 @@
+// oracle_payout_v2.rue — Prediction Market Oracle Payout Puzzle (with timeout)
+//
+// Locks XCH that can be claimed in two ways:
+//   1. Oracle signs the outcome (normal resolution)
+//   2. Anyone can reclaim after timeout height (abandoned market refund)
+//
+// Curried (baked in at coin creation):
+//   - oracle_pubkey: The trusted oracle's public key
+//   - yes_asset_id: Asset ID of the YES CAT
+//   - no_asset_id: Asset ID of the NO CAT
+//   - market_id: Unique market identifier (prevents replay)
+//   - timeout_height: Block height after which anyone can reclaim (0 = no timeout)
+//
+// Solution (provided at spend time):
+//   - mode: 0 = oracle resolution, 1 = timeout refund
+//   - outcome: 1 = YES wins, 0 = NO wins (ignored if mode=1)
+//   - receiver_puzzle_hash: Where to send the XCH
+//   - my_amount: Amount locked in this coin
+
+fn main(
+    // Curried parameters
+    oracle_pubkey: PublicKey,
+    yes_asset_id: Bytes32,
+    no_asset_id: Bytes32,
+    market_id: Bytes32,
+    timeout_height: Int,
+
+    // Solution parameters
+    mode: Int,
+    outcome: Int,
+    receiver_puzzle_hash: Bytes32,
+    my_amount: Int,
+) -> List<Condition> {
+    // Verify coin amount
+    let check_amount = AssertMyAmount { amount: my_amount };
+
+    if mode == 0 {
+        // === ORACLE RESOLUTION ===
+        assert (outcome == 0) | (outcome == 1);
+
+        let winning_asset_id = if outcome == 1 {
+            yes_asset_id
+        } else {
+            no_asset_id
+        };
+
+        let outcome_byte: Bytes = if outcome == 1 { 0x01 } else { 0x00 };
+        let oracle_message: Bytes = market_id + outcome_byte;
+
+        let sig = AggSigMe {
+            public_key: oracle_pubkey,
+            message: oracle_message,
+        };
+
+        let payout = CreateCoin {
+            puzzle_hash: receiver_puzzle_hash,
+            amount: my_amount,
+            memos: Memos {
+                value: [receiver_puzzle_hash, winning_asset_id],
+            },
+        };
+
+        [sig, check_amount, payout]
+    } else {
+        // === TIMEOUT REFUND ===
+        // Must be past timeout height
+        assert timeout_height > 0;
+
+        let height_check = AssertHeightAbsolute {
+            height: timeout_height,
+        };
+
+        let refund = CreateCoin {
+            puzzle_hash: receiver_puzzle_hash,
+            amount: my_amount,
+        };
+
+        [height_check, check_amount, refund]
+    }
+}
+
+test fn test_yes_wins() {
+    let pk = 0xc00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 as PublicKey;
+    let yes_id = sha256(0x01);
+    let no_id = sha256(0x02);
+    let mkt = sha256(0x03);
+    let recv = sha256(0x04);
+
+    let result = main(pk, yes_id, no_id, mkt, 100000, 0, 1, recv, 1000);
+    assert result is (AggSigMe, (AssertMyAmount, (CreateCoin, nil)));
+}
+
+test fn test_no_wins() {
+    let pk = 0xc00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 as PublicKey;
+    let yes_id = sha256(0x01);
+    let no_id = sha256(0x02);
+    let mkt = sha256(0x03);
+    let recv = sha256(0x04);
+
+    let result = main(pk, yes_id, no_id, mkt, 100000, 0, 0, recv, 1000);
+    assert result is (AggSigMe, (AssertMyAmount, (CreateCoin, nil)));
+}
+
+test fn test_timeout_refund() {
+    let pk = 0xc00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 as PublicKey;
+    let yes_id = sha256(0x01);
+    let no_id = sha256(0x02);
+    let mkt = sha256(0x03);
+    let recv = sha256(0x04);
+
+    let result = main(pk, yes_id, no_id, mkt, 100000, 1, 0, recv, 1000);
+    assert result is (AssertHeightAbsolute, (AssertMyAmount, (CreateCoin, nil)));
+}

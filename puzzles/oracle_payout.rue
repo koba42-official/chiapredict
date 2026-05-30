@@ -1,0 +1,85 @@
+// oracle_payout.rue — Prediction Market Oracle Payout Puzzle
+//
+// Locks XCH that can only be claimed when oracle signs the outcome.
+//
+// Curried (baked in at coin creation):
+//   - oracle_pubkey: The trusted oracle's public key
+//   - yes_asset_id: Asset ID of the YES CAT
+//   - no_asset_id: Asset ID of the NO CAT
+//   - market_id: Unique market identifier (prevents replay)
+//
+// Solution (provided at spend time):
+//   - outcome: 1 = YES wins, 0 = NO wins
+//   - receiver_puzzle_hash: Where to send the XCH
+//   - my_amount: Amount locked in this coin
+//
+// Oracle signs: sha256(market_id ++ outcome_byte)
+
+fn main(
+    // Curried parameters
+    oracle_pubkey: PublicKey,
+    yes_asset_id: Bytes32,
+    no_asset_id: Bytes32,
+    market_id: Bytes32,
+
+    // Solution parameters
+    outcome: Int,
+    receiver_puzzle_hash: Bytes32,
+    my_amount: Int,
+) -> List<Condition> {
+    // Validate outcome is binary
+    assert (outcome == 0) | (outcome == 1);
+
+    // Determine winning asset ID
+    let winning_asset_id = if outcome == 1 {
+        yes_asset_id
+    } else {
+        no_asset_id
+    };
+
+    // Oracle signs market_id + outcome byte
+    let outcome_byte: Bytes = if outcome == 1 { 0x01 } else { 0x00 };
+    let oracle_message: Bytes = market_id + outcome_byte;
+
+    // Require oracle signature (bound to this coin via AggSigMe)
+    let sig = AggSigMe {
+        public_key: oracle_pubkey,
+        message: oracle_message,
+    };
+
+    // Verify coin amount
+    let check_amount = AssertMyAmount { amount: my_amount };
+
+    // Pay out to receiver with winning asset ID as memo
+    let payout = CreateCoin {
+        puzzle_hash: receiver_puzzle_hash,
+        amount: my_amount,
+        memos: Memos {
+            value: [receiver_puzzle_hash, winning_asset_id],
+        },
+    };
+
+    [sig, check_amount, payout]
+}
+
+test fn test_yes_wins() {
+    let pk = 0xc00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 as PublicKey;
+    let yes_id = sha256(0x01);
+    let no_id = sha256(0x02);
+    let mkt = sha256(0x03);
+    let recv = sha256(0x04);
+
+    let result = main(pk, yes_id, no_id, mkt, 1, recv, 1000);
+    assert result is (AggSigMe, (AssertMyAmount, (CreateCoin, nil)));
+}
+
+test fn test_no_wins() {
+    let pk = 0xc00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001 as PublicKey;
+    let yes_id = sha256(0x01);
+    let no_id = sha256(0x02);
+    let mkt = sha256(0x03);
+    let recv = sha256(0x04);
+
+    let result = main(pk, yes_id, no_id, mkt, 0, recv, 1000);
+    assert result is (AggSigMe, (AssertMyAmount, (CreateCoin, nil)));
+}

@@ -1,0 +1,9 @@
+{
+  "curried_clvm": "(a (q 2 (i (any (not 47) (= 47 (q . 1))) (q 4 (c (q . 44) (c 2 (c (concat 23 (a (i (= 47 (q . 1)) (q 1 . 1) (q 1 . 0x00)) 1)) ()))) (c (c (q . 73) (c -65 ())) (c (c (q . 51) (c 95 (c -65 (c (c 95 (c (a (i (= 47 (q . 1)) (q . 5) (q . 11)) 1) ())) ())))) ()))) (q 8)) 1) (c (q . 0x873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617) (c (q . 0xcd2eb0b4307e784be90d05e18fec22857a7bdf9c77f0f9e38f183a24de55ef58) (c (q . 0x7090c0ffaee10faec9da78c7dc7bb41d4d1c9c8b1ffb88bd6e8d3e2abf38a2e3) (c (q . 0x0b4d97121ca3369adb8f9b1fb79aea137a35df84ec31937c96b69a1aaccc7f8b) 1)))))",
+  "curried_hex": "ff02ffff01ff02ffff03ffff21ffff20ff2f80ffff09ff2fffff01018080ffff01ff04ffff04ffff012cffff04ff02ffff04ffff0eff17ffff02ffff03ffff09ff2fffff010180ffff01ff0101ffff01ff010080ff018080ff80808080ffff04ffff04ffff0149ffff04ff81bfff808080ffff04ffff04ffff0133ffff04ff5fffff04ff81bfffff04ffff04ff5fffff04ffff02ffff03ffff09ff2fffff010180ffff0105ffff010b80ff0180ff808080ff8080808080ff80808080ffff01ff088080ff0180ffff04ffff01b0873e20f535b03c2de0199aab41d61cea2e755d19b0ddf9964b24e634907cc9181bbb824b9009c50e9551c76adc224617ffff04ffff01a0cd2eb0b4307e784be90d05e18fec22857a7bdf9c77f0f9e38f183a24de55ef58ffff04ffff01a07090c0ffaee10faec9da78c7dc7bb41d4d1c9c8b1ffb88bd6e8d3e2abf38a2e3ffff04ffff01a00b4d97121ca3369adb8f9b1fb79aea137a35df84ec31937c96b69a1aaccc7f8bff018080808080",
+  "solution_clvm": "(1 0x96cc6497266fc6fef031fa2dbd75d75865cb8dd5dc674b587b867d514f8b8cc2 1000)",
+  "solution_hex": "ff01ffa096cc6497266fc6fef031fa2dbd75d75865cb8dd5dc674b587b867d514f8b8cc2ff8203e880",
+  "outcome": 1,
+  "receiver_puzzle_hash": "96cc6497266fc6fef031fa2dbd75d75865cb8dd5dc674b587b867d514f8b8cc2",
+  "oracle_fingerprint": 1631380421
+}

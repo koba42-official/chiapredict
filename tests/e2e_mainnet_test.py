@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ChiaPredict — E2E mainnet test with tiny amount.
+XCH Predict — E2E mainnet test with tiny amount.
 
 Tests the full lifecycle:
   1. Compile puzzle
@@ -47,7 +47,7 @@ def sage_rpc(method, body=None):
 
 def main():
     print("=" * 60)
-    print("ChiaPredict — E2E Mainnet Test (1000 mojos)")
+    print("XCH Predict — E2E Mainnet Test (1000 mojos)")
     print("=" * 60)
     
     # Check forbidden fingerprints before any wallet interaction

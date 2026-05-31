@@ -1,4 +1,4 @@
-# ChiaPredict Production Readiness Audit
+# XCH Predict Production Readiness Audit
 
 **Date:** 2026-02-10
 **Auditor:** OpenClaw automated audit
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-ChiaPredict is a working proof-of-concept that has successfully completed end-to-end mainnet tests. The core puzzle logic is sound. However, it is **nowhere near production-ready**. The project has critical security gaps, no offer invalidation, no automated redemption flow, a static frontend with zero markets rendered, and several scripts that leak secret keys into memory. The protocol's biggest risk is **locked funds with no recovery path** (v1 puzzles) and **stale offers that can't be cancelled on-chain**.
+XCH Predict is a working proof-of-concept that has successfully completed end-to-end mainnet tests. The core puzzle logic is sound. However, it is **nowhere near production-ready**. The project has critical security gaps, no offer invalidation, no automated redemption flow, a static frontend with zero markets rendered, and several scripts that leak secret keys into memory. The protocol's biggest risk is **locked funds with no recovery path** (v1 puzzles) and **stale offers that can't be cancelled on-chain**.
 
 **Verdict: Alpha/prototype. Not safe for real money beyond dust-level testing.**
 
@@ -373,7 +373,7 @@ Ordered by priority (blocking → important → nice-to-have):
 
 ## H. Conclusion
 
-The project demonstrates genuine understanding of Chia's CLVM, BLS signatures, CATs, and offer mechanics. The core puzzle works. But the gap between "working prototype" and "production prediction market" is enormous.
+The project demonstrates genuine understanding of XCH CLVM, BLS signatures, CATs, and offer mechanics. The core puzzle works. But the gap between "working prototype" and "production prediction market" is enormous.
 
 The three most urgent items:
 1. **Secret key in debug_spend.py** — remove NOW

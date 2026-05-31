@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ChiaPredict — Create a complete prediction market.
+XCH Predict — Create a complete prediction market.
 
 Usage:
   python3 create_market_v2.py "Will BTC hit 100k by March 2026?" --oracle-fp 1631380421
@@ -71,7 +71,7 @@ def get_current_blockchain_height():
     try:
         req = urllib.request.Request(
             "https://kraken.fireacademy.io/leaflet/get_blockchain_state",
-            headers={"Content-Type": "application/json", "User-Agent": "ChiaPredict/0.1"}
+            headers={"Content-Type": "application/json", "User-Agent": "XCH Predict/0.1"}
         )
         resp = urllib.request.urlopen(req, timeout=30)
         data = json.loads(resp.read())
@@ -148,7 +148,7 @@ def post_to_dexie(offer_str):
     req = urllib.request.Request(
         "https://dexie.space/v1/offers",
         data=body,
-        headers={"Content-Type": "application/json", "User-Agent": "ChiaPredict/0.1"},
+        headers={"Content-Type": "application/json", "User-Agent": "XCH Predict/0.1"},
     )
     resp = urllib.request.urlopen(req, timeout=30)
     return json.loads(resp.read())
@@ -183,7 +183,7 @@ def create_dexie_offer(asset_id, ticker, offer_qty, offer_price, fee=0):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Create a ChiaPredict market")
+    parser = argparse.ArgumentParser(description="Create a XCH Predict market")
     parser.add_argument("question", help="The market question")
     parser.add_argument("--oracle-fp", type=int, default=1631380421, help="Oracle wallet fingerprint")
     parser.add_argument("--mint-fp", type=int, default=None,
@@ -227,7 +227,7 @@ def main():
     os.makedirs(market_dir, exist_ok=True)
 
     print("=" * 60)
-    print(f"ChiaPredict — Creating Market")
+    print(f"XCH Predict — Creating Market")
     print(f"  Question: {args.question}")
     print(f"  Market ID: {market_id[:32]}...")
     print(f"  Puzzle: {'v2 (timeout)' if use_v2 else 'v1 (no timeout)'}")

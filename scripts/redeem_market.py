@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ChiaPredict — Post redemption offers for a resolved market.
+XCH Predict — Post redemption offers for a resolved market.
 
 After oracle resolution, this posts Dexie offers to buy back winning CATs at 1:1 XCH.
 Losing CATs become worthless (no buyback offer).
@@ -52,7 +52,7 @@ def post_to_dexie(offer_str):
     req = urllib.request.Request(
         "https://dexie.space/v1/offers",
         data=body,
-        headers={"Content-Type": "application/json", "User-Agent": "ChiaPredict/0.1"},
+        headers={"Content-Type": "application/json", "User-Agent": "XCH Predict/0.1"},
     )
     resp = urllib.request.urlopen(req, timeout=30)
     return json.loads(resp.read())
@@ -95,7 +95,7 @@ def main():
     buyback_amount = args.redeem_qty * args.price
 
     print("=" * 60)
-    print(f"ChiaPredict — Redemption")
+    print(f"XCH Predict — Redemption")
     print(f"  Question: {state['question']}")
     print(f"  Outcome: {outcome}")
     print(f"  Winning CAT: {winning_asset[:16]}...")

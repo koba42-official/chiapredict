@@ -1,16 +1,16 @@
-# ChiaPredict: Proof of Concept Report
+# XCH Predict: Proof of Concept Report
 
-**Trustless Prediction Markets on the Chia Blockchain**
+**Trustless Prediction Markets on the XCH Blockchain**
 
 Date: February 10, 2026
 Author: DracattusDev
-Network: Chia Mainnet
+Network: XCH Mainnet
 
 ---
 
 ## Executive Summary
 
-ChiaPredict is the first prediction market infrastructure built on the Chia blockchain. On February 10, 2026, we successfully demonstrated the complete lifecycle of a prediction market on Chia mainnet: custom puzzle deployment, CAT token issuance, decentralized exchange listing, market funding, oracle resolution, and payout — all using a single custom Rue puzzle and native Chia primitives.
+XCH Predict is the first prediction market infrastructure built on the XCH blockchain. On February 10, 2026, we successfully demonstrated the complete lifecycle of a prediction market on XCH mainnet: custom puzzle deployment, CAT token issuance, decentralized exchange listing, market funding, oracle resolution, and payout — all using a single custom Rue puzzle and native XCH primitives.
 
 This document provides a technical summary of the proof of concept, on-chain evidence for every transaction, and links for independent verification.
 
@@ -18,12 +18,12 @@ This document provides a technical summary of the proof of concept, on-chain evi
 
 ## Architecture
 
-ChiaPredict uses four Chia-native components:
+XCH Predict uses four XCH-native components:
 
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
 | **Oracle Puzzle** | Rue → CLVM (AggSigMe) | Locks XCH until oracle signs the outcome |
-| **YES/NO Tokens** | Chia Asset Tokens (CATs) | Tradeable shares representing each outcome |
+| **YES/NO Tokens** | XCH Asset Tokens (CATs) | Tradeable shares representing each outcome |
 | **Trading** | Dexie DEX (native offers) | Orderbook for buying/selling outcome tokens |
 | **Resolution** | BLS signatures (AugSchemeMPL) | Oracle signs outcome, unlocking the locked XCH |
 
@@ -79,14 +79,14 @@ During testing, 120 XCH was accidentally sent to the Round 2 puzzle address. The
 
 ## Milestone 2: CAT Issuance
 
-**Objective:** Mint YES and NO tokens as Chia Asset Tokens for two markets.
+**Objective:** Mint YES and NO tokens as XCH Asset Tokens for two markets.
 
 ### Market Infrastructure Tokens (Round 2 Test)
 
 | Token | Asset ID | Supply | Dexie |
 |-------|----------|--------|-------|
-| ChiaPredict YES | `188d646318b48fdb7290819a5977a4d45913e5a4dd19cf78b9237630b5cb3232` | 1,000,000 | [Offer](https://dexie.space/offers/CigwAme4oXF8hwcyN9KRu9EVi3Pxvciw95BCzNC56XR) |
-| ChiaPredict NO | `bc9c5480a4d0d5220989c8ce5001b7747074dda522423a454d7e05a546bbc8e1` | 1,000,000 | [Offer](https://dexie.space/offers/PKTqBnMS6xuskbejx5bS5Xrs6sn2pLepXuKkB78H3zA) |
+| XCH Predict YES | `188d646318b48fdb7290819a5977a4d45913e5a4dd19cf78b9237630b5cb3232` | 1,000,000 | [Offer](https://dexie.space/offers/CigwAme4oXF8hwcyN9KRu9EVi3Pxvciw95BCzNC56XR) |
+| XCH Predict NO | `bc9c5480a4d0d5220989c8ce5001b7747074dda522423a454d7e05a546bbc8e1` | 1,000,000 | [Offer](https://dexie.space/offers/PKTqBnMS6xuskbejx5bS5Xrs6sn2pLepXuKkB78H3zA) |
 
 ### "Will ETH flip BTC market cap by 2027?" Market Tokens
 
@@ -177,12 +177,12 @@ During testing, 120 XCH was accidentally sent to the Round 2 puzzle address. The
 
 ## Conclusion
 
-ChiaPredict demonstrates that prediction markets are viable on the Chia blockchain using native primitives: Rue puzzles for trustless escrow, CATs for outcome tokens, and Dexie for decentralized trading. The complete lifecycle — from market creation to resolution — has been validated on mainnet with real transactions.
+XCH Predict demonstrates that prediction markets are viable on the XCH blockchain using native primitives: Rue puzzles for trustless escrow, CATs for outcome tokens, and Dexie for decentralized trading. The complete lifecycle — from market creation to resolution — has been validated on mainnet with real transactions.
 
-The protocol uses a single custom puzzle, standard CAT issuance, and existing DEX infrastructure. No modifications to the Chia protocol are required. The entire system can be operated from the command line or via OpenClaw chat commands.
+The protocol uses a single custom puzzle, standard CAT issuance, and existing DEX infrastructure. No modifications to the XCH protocol are required. The entire system can be operated from the command line or via OpenClaw chat commands.
 
 All transactions referenced in this document can be independently verified on [spacescan.io](https://spacescan.io).
 
 ---
 
-*ChiaPredict is open-source protocol tooling. It is not a platform, exchange, or financial service.*
+*XCH Predict is open-source protocol tooling. It is not a platform, exchange, or financial service.*

@@ -1,12 +1,12 @@
-# ChiaPredict — Prediction Markets on Chia
+# XCH Predict — Prediction Markets on XCH
 
-![ChiaPredict Logo](docs/assets/chiapredict-logo.jpg)
+![XCH Predict Logo](docs/assets/xchpredict-logo.jpg)
 
-Trustless prediction markets built on the Chia blockchain using Rue smart contracts, CAT tokens, and Dexie DEX.
+Trustless prediction markets built on the XCH blockchain using Rue smart contracts, CAT tokens, and Dexie DEX.
 
 **Status: Phase 1 Complete — Full E2E lifecycle proven on mainnet ✅**
 
-🌐 **Live**: [chiapredict.dracattus.com](https://chiapredict.dracattus.com)
+🌐 **Live**: [xchpredict.dracattus.com](https://xchpredict.dracattus.com)
 📦 **Source**: [git.dracattus.com/dracattus/chia-predict](https://git.dracattus.com/dracattus/chia-predict)
 
 ---
@@ -43,7 +43,7 @@ Trustless prediction markets built on the Chia blockchain using Rue smart contra
 │ Sage     │ Dexie    │ FireAcademy /          │
 │ Wallet   │ DEX API  │ Spacescan APIs         │
 ├──────────┴──────────┴───────────────────────┤
-│              Chia Blockchain                  │
+│              XCH Blockchain                  │
 │  ┌────────────┐  ┌──────────┐  ┌─────────┐ │
 │  │ Oracle      │  │ YES/NO   │  │ Offer   │ │
 │  │ Payout      │  │ CATs     │  │ Files   │ │
@@ -128,7 +128,7 @@ python3 scripts/redeem_market.py markets/{market_id} --qty 100000 --price 1000 -
 
 ## Economics
 
-ChiaPredict uses a **spread-based revenue model**:
+XCH Predict uses a **spread-based revenue model**:
 
 - YES + NO tokens priced so the pair costs more than the payout (e.g., 55 + 55 = 110 for 100 payout)
 - The difference is the house edge (10-20% typical)
@@ -136,7 +136,7 @@ ChiaPredict uses a **spread-based revenue model**:
 - No resolution fees (Phase 1)
 - Full transparency: all transactions verifiable on-chain
 
-See the [Economics section](https://chiapredict.dracattus.com/#economics) on the website for detailed examples.
+See the [Economics section](https://xchpredict.dracattus.com/#economics) on the website for detailed examples.
 
 ## Trust Model (Honest Assessment)
 
@@ -149,8 +149,8 @@ See the [Economics section](https://chiapredict.dracattus.com/#economics) on the
 ## Tech Stack
 
 - **Smart Contracts:** [Rue](https://github.com/xch-dev/rue) → CLVM
-- **Tokens:** Standard Chia CATs (single-issuance TAIL)
-- **Trading:** Chia native offer files + [Dexie](https://dexie.space) aggregation
+- **Tokens:** Standard XCH CATs (single-issuance TAIL)
+- **Trading:** XCH native offer files + [Dexie](https://dexie.space) aggregation
 - **Wallet:** [Sage](https://github.com/xch-dev/sage) (CLI v0.12.2 + GUI)
 - **Signing:** BLS signatures via blspy 2.0.3
 - **Frontend:** Static HTML (dark theme, responsive, Dexie API integration)
@@ -203,11 +203,11 @@ $RUE_BIN test puzzles/oracle_payout_v2.rue
 
 ## Active Markets
 
-Visit [chiapredict.dracattus.com](https://chiapredict.dracattus.com) to see live markets with Dexie trading links.
+Visit [xchpredict.dracattus.com](https://xchpredict.dracattus.com) to see live markets with Dexie trading links.
 
 ## Legal
 
-ChiaPredict is open-source protocol tooling, not a centralized exchange:
+XCH Predict is open-source protocol tooling, not a centralized exchange:
 - XCH-native only (no fiat on/off ramp)
 - Peer-to-peer offer-based trading via Dexie (no central order book)
 - No custody of user funds at any point

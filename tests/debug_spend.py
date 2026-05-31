@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ChiaPredict — Debug & re-attempt the oracle_payout spend.
+XCH Predict — Debug & re-attempt the oracle_payout spend.
 """
 
 import json
@@ -64,7 +64,7 @@ def compute_coin_id():
 
 def main():
     print("=" * 60)
-    print("ChiaPredict — Spend Bundle Debug")
+    print("XCH Predict — Spend Bundle Debug")
     print("=" * 60)
     
     # Check forbidden fingerprints before any wallet interaction
@@ -204,7 +204,7 @@ def main():
             data=push_body,
             headers={
                 "Content-Type": "application/json",
-                "User-Agent": "ChiaPredict/0.1",
+                "User-Agent": "XCH Predict/0.1",
             },
             method="POST",
         )

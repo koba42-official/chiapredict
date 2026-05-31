@@ -1,4 +1,4 @@
-# XCH Predict: Proof of Concept Report
+# XCHPredict: Proof of Concept Report
 
 **Trustless Prediction Markets on the XCH Blockchain**
 
@@ -10,7 +10,7 @@ Network: XCH Mainnet
 
 ## Executive Summary
 
-XCH Predict is the first prediction market infrastructure built on the XCH blockchain. On February 10, 2026, we successfully demonstrated the complete lifecycle of a prediction market on XCH mainnet: custom puzzle deployment, CAT token issuance, decentralized exchange listing, market funding, oracle resolution, and payout — all using a single custom Rue puzzle and native XCH primitives.
+XCHPredict is the first prediction market infrastructure built on the XCH blockchain. On February 10, 2026, we successfully demonstrated the complete lifecycle of a prediction market on XCH mainnet: custom puzzle deployment, CAT token issuance, decentralized exchange listing, market funding, oracle resolution, and payout — all using a single custom Rue puzzle and native XCH primitives.
 
 This document provides a technical summary of the proof of concept, on-chain evidence for every transaction, and links for independent verification.
 
@@ -18,7 +18,7 @@ This document provides a technical summary of the proof of concept, on-chain evi
 
 ## Architecture
 
-XCH Predict uses four XCH-native components:
+XCHPredict uses four XCH-native components:
 
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
@@ -85,8 +85,8 @@ During testing, 120 XCH was accidentally sent to the Round 2 puzzle address. The
 
 | Token | Asset ID | Supply | Dexie |
 |-------|----------|--------|-------|
-| XCH Predict YES | `188d646318b48fdb7290819a5977a4d45913e5a4dd19cf78b9237630b5cb3232` | 1,000,000 | [Offer](https://dexie.space/offers/CigwAme4oXF8hwcyN9KRu9EVi3Pxvciw95BCzNC56XR) |
-| XCH Predict NO | `bc9c5480a4d0d5220989c8ce5001b7747074dda522423a454d7e05a546bbc8e1` | 1,000,000 | [Offer](https://dexie.space/offers/PKTqBnMS6xuskbejx5bS5Xrs6sn2pLepXuKkB78H3zA) |
+| XCHPredict YES | `188d646318b48fdb7290819a5977a4d45913e5a4dd19cf78b9237630b5cb3232` | 1,000,000 | [Offer](https://dexie.space/offers/CigwAme4oXF8hwcyN9KRu9EVi3Pxvciw95BCzNC56XR) |
+| XCHPredict NO | `bc9c5480a4d0d5220989c8ce5001b7747074dda522423a454d7e05a546bbc8e1` | 1,000,000 | [Offer](https://dexie.space/offers/PKTqBnMS6xuskbejx5bS5Xrs6sn2pLepXuKkB78H3zA) |
 
 ### "Will ETH flip BTC market cap by 2027?" Market Tokens
 
@@ -177,7 +177,7 @@ During testing, 120 XCH was accidentally sent to the Round 2 puzzle address. The
 
 ## Conclusion
 
-XCH Predict demonstrates that prediction markets are viable on the XCH blockchain using native primitives: Rue puzzles for trustless escrow, CATs for outcome tokens, and Dexie for decentralized trading. The complete lifecycle — from market creation to resolution — has been validated on mainnet with real transactions.
+XCHPredict demonstrates that prediction markets are viable on the XCH blockchain using native primitives: Rue puzzles for trustless escrow, CATs for outcome tokens, and Dexie for decentralized trading. The complete lifecycle — from market creation to resolution — has been validated on mainnet with real transactions.
 
 The protocol uses a single custom puzzle, standard CAT issuance, and existing DEX infrastructure. No modifications to the XCH protocol are required. The entire system can be operated from the command line or via OpenClaw chat commands.
 
@@ -185,4 +185,4 @@ All transactions referenced in this document can be independently verified on [s
 
 ---
 
-*XCH Predict is open-source protocol tooling. It is not a platform, exchange, or financial service.*
+*XCHPredict is open-source protocol tooling. It is not a platform, exchange, or financial service.*

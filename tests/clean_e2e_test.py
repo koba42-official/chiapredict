@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-XCH Predict — Clean E2E Mainnet Test (Round 2)
+XCHPredict — Clean E2E Mainnet Test (Round 2)
 
 Full lifecycle with proper state preservation:
   1. Compile puzzle (current AggSigMe version)
@@ -224,7 +224,7 @@ def step_find_coin(state):
     try:
         req = urllib.request.Request(url, data=body, headers={
             "Content-Type": "application/json",
-            "User-Agent": "XCH Predict/0.1",
+            "User-Agent": "XCHPredict/0.1",
         })
         resp = urllib.request.urlopen(req, timeout=30)
         data = json.loads(resp.read())
@@ -401,7 +401,7 @@ def step_spend(state):
             data=push_body,
             headers={
                 "Content-Type": "application/json",
-                "User-Agent": "XCH Predict/0.1",
+                "User-Agent": "XCHPredict/0.1",
             },
             method="POST",
         )

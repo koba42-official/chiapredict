@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-XCH Predict — Resolve a prediction market.
+XCHPredict — Resolve a prediction market.
 
 Usage:
   python3 resolve_market.py markets/<id> --outcome yes
@@ -73,7 +73,7 @@ def wait_for_coin_spent(coin_id, timeout_seconds=120):
             url = "https://kraken.fireacademy.io/leaflet/get_coin_record_by_name"
             body = json.dumps({"name": f"0x{coin_id}"}).encode()
             req = urllib.request.Request(url, data=body, headers={
-                "Content-Type": "application/json", "User-Agent": "XCH Predict/0.1"
+                "Content-Type": "application/json", "User-Agent": "XCHPredict/0.1"
             })
             resp = urllib.request.urlopen(req, timeout=30)
             data = json.loads(resp.read())
@@ -137,7 +137,7 @@ def cancel_offers_for_market(state):
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="Resolve a XCH Predict market")
+    parser = argparse.ArgumentParser(description="Resolve a XCHPredict market")
     parser.add_argument("market_dir", help="Path to market directory")
     parser.add_argument("--outcome", choices=["yes", "no"], required=True)
     parser.add_argument("--receiver", help="Receiver XCH address (default: oracle wallet)")
@@ -184,7 +184,7 @@ def main():
     url = "https://kraken.fireacademy.io/leaflet/get_coin_records_by_puzzle_hash"
     body = json.dumps({"puzzle_hash": f"0x{curried_hash}", "include_spent_coins": False}).encode()
     req = urllib.request.Request(url, data=body, headers={
-        "Content-Type": "application/json", "User-Agent": "XCH Predict/0.1"
+        "Content-Type": "application/json", "User-Agent": "XCHPredict/0.1"
     })
     resp = urllib.request.urlopen(req, timeout=30)
     data = json.loads(resp.read())
@@ -289,7 +289,7 @@ def main():
         req = urllib.request.Request(
             "https://kraken.fireacademy.io/leaflet/push_tx",
             data=push_body,
-            headers={"Content-Type": "application/json", "User-Agent": "XCH Predict/0.1"},
+            headers={"Content-Type": "application/json", "User-Agent": "XCHPredict/0.1"},
             method="POST",
         )
         
@@ -321,7 +321,7 @@ def main():
         verify_body = json.dumps({"puzzle_hash": f"0x{curried_hash}", "include_spent_coins": False}).encode()
         verify_req = urllib.request.Request(
             "https://kraken.fireacademy.io/leaflet/get_coin_records_by_puzzle_hash",
-            data=verify_body, headers={"Content-Type": "application/json", "User-Agent": "XCH Predict/0.1"}
+            data=verify_body, headers={"Content-Type": "application/json", "User-Agent": "XCHPredict/0.1"}
         )
         verify_resp = urllib.request.urlopen(verify_req, timeout=30)
         remaining = len(json.loads(verify_resp.read()).get("coin_records", []))

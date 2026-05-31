@@ -1,4 +1,4 @@
-# XCH Predict — Next Steps
+# XCHPredict — Next Steps
 
 ## Phase 1: Minimum Viable Market (2-3 weeks)
 

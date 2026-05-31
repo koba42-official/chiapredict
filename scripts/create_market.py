@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-XCH Predict — Create a prediction market.
+XCHPredict — Create a prediction market.
 
 Usage:
   python3 create_market.py --question "Will BTC hit 100k by April?" --amount 1000000
@@ -121,7 +121,7 @@ def create_market(question, amount_mojos, oracle_fingerprint=None):
     return market_data
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Create a XCH Predict market")
+    parser = argparse.ArgumentParser(description="Create a XCHPredict market")
     parser.add_argument("--question", required=True, help="Market question")
     parser.add_argument("--amount", type=int, default=1000000000, help="Amount in mojos (default: 1 XCH)")
     parser.add_argument("--oracle-fingerprint", type=int, help="Oracle key fingerprint")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-XCH Predict — Market command handlers for OpenClaw integration.
+XCHPredict — Market command handlers for OpenClaw integration.
 Called by the OpenClaw skill to execute market operations.
 
 Commands:
@@ -50,14 +50,14 @@ def sage_rpc(method, body):
 def fire_api(endpoint, body):
     data = json.dumps(body).encode()
     req = urllib.request.Request(f"{FIRE_API}/{endpoint}", data=data,
-        headers={"Content-Type": "application/json", "User-Agent": "XCH Predict/0.1"})
+        headers={"Content-Type": "application/json", "User-Agent": "XCHPredict/0.1"})
     resp = urllib.request.urlopen(req, timeout=30)
     return json.loads(resp.read())
 
 
 def dexie_search(asset_id):
     url = f"https://dexie.space/v1/offers?offered={asset_id}&page=1&page_size=5"
-    req = urllib.request.Request(url, headers={"User-Agent": "XCH Predict/0.1"})
+    req = urllib.request.Request(url, headers={"User-Agent": "XCHPredict/0.1"})
     resp = urllib.request.urlopen(req, timeout=15)
     return json.loads(resp.read())
 
@@ -161,7 +161,7 @@ def cmd_fund(market_dir):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="XCH Predict market commands")
+    parser = argparse.ArgumentParser(description="XCHPredict market commands")
     sub = parser.add_subparsers(dest="command")
 
     sub.add_parser("list")

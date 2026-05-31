@@ -1,8 +1,8 @@
-# XCH Predict Protocol Specification
+# XCHPredict Protocol Specification
 
 ## Overview
 
-XCH Predict enables trustless binary prediction markets on the XCH blockchain. Markets resolve to YES or NO, with token holders of the winning outcome redeeming XCH.
+XCHPredict enables trustless binary prediction markets on the XCH blockchain. Markets resolve to YES or NO, with token holders of the winning outcome redeeming XCH.
 
 ## Actors
 

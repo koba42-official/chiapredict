@@ -1,6 +1,6 @@
-# XCH Predict — Prediction Markets on XCH
+# XCHPredict — Prediction Markets on XCH
 
-![XCH Predict Logo](docs/assets/xchpredict-logo.jpg)
+![XCHPredict Logo](docs/assets/xchpredict-logo.jpg)
 
 Trustless prediction markets built on the XCH blockchain using Rue smart contracts, CAT tokens, and Dexie DEX.
 
@@ -128,7 +128,7 @@ python3 scripts/redeem_market.py markets/{market_id} --qty 100000 --price 1000 -
 
 ## Economics
 
-XCH Predict uses a **spread-based revenue model**:
+XCHPredict uses a **spread-based revenue model**:
 
 - YES + NO tokens priced so the pair costs more than the payout (e.g., 55 + 55 = 110 for 100 payout)
 - The difference is the house edge (10-20% typical)
@@ -207,7 +207,7 @@ Visit [xchpredict.dracattus.com](https://xchpredict.dracattus.com) to see live m
 
 ## Legal
 
-XCH Predict is open-source protocol tooling, not a centralized exchange:
+XCHPredict is open-source protocol tooling, not a centralized exchange:
 - XCH-native only (no fiat on/off ramp)
 - Peer-to-peer offer-based trading via Dexie (no central order book)
 - No custody of user funds at any point

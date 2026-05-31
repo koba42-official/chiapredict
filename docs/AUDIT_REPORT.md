@@ -1,4 +1,4 @@
-# XCH Predict Production Readiness Audit
+# XCHPredict Production Readiness Audit
 
 **Date:** 2026-02-10
 **Auditor:** OpenClaw automated audit
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-XCH Predict is a working proof-of-concept that has successfully completed end-to-end mainnet tests. The core puzzle logic is sound. However, it is **nowhere near production-ready**. The project has critical security gaps, no offer invalidation, no automated redemption flow, a static frontend with zero markets rendered, and several scripts that leak secret keys into memory. The protocol's biggest risk is **locked funds with no recovery path** (v1 puzzles) and **stale offers that can't be cancelled on-chain**.
+XCHPredict is a working proof-of-concept that has successfully completed end-to-end mainnet tests. The core puzzle logic is sound. However, it is **nowhere near production-ready**. The project has critical security gaps, no offer invalidation, no automated redemption flow, a static frontend with zero markets rendered, and several scripts that leak secret keys into memory. The protocol's biggest risk is **locked funds with no recovery path** (v1 puzzles) and **stale offers that can't be cancelled on-chain**.
 
 **Verdict: Alpha/prototype. Not safe for real money beyond dust-level testing.**
 

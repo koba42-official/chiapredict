@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ChiaPredict — Spend the oracle_payout puzzle coin.
+XCH Predict — Spend the oracle_payout puzzle coin.
 
 This script:
   1. Finds the coin at the curried puzzle hash
@@ -42,7 +42,7 @@ def sage_rpc(method, body=None):
 
 def main():
     print("=" * 60)
-    print("ChiaPredict — Spend Oracle Payout Puzzle")
+    print("XCH Predict — Spend Oracle Payout Puzzle")
     print("=" * 60)
 
     # Load state
@@ -69,7 +69,7 @@ def main():
     import urllib.request
     url = f"https://api.spacescan.io/coin/search/{puzzle_address}"
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "ChiaPredict/0.1"})
+        req = urllib.request.Request(url, headers={"User-Agent": "XCH Predict/0.1"})
         resp = urllib.request.urlopen(req, timeout=10)
         data = json.loads(resp.read())
         print(f"  Spacescan response: {json.dumps(data)[:200]}...")
@@ -80,7 +80,7 @@ def main():
     # Also try spacescan puzzle hash endpoint
     url2 = f"https://api2.spacescan.io/1/xch/coins/address/{puzzle_address}"
     try:
-        req = urllib.request.Request(url2, headers={"User-Agent": "ChiaPredict/0.1"})
+        req = urllib.request.Request(url2, headers={"User-Agent": "XCH Predict/0.1"})
         resp = urllib.request.urlopen(req, timeout=10)
         data2 = json.loads(resp.read())
         print(f"  Spacescan v2: {json.dumps(data2)[:300]}...")
@@ -164,7 +164,7 @@ def main():
     print(f"\n[6] Checking spacescan for coin...")
     url3 = f"https://api2.spacescan.io/1/xch/coin/address/{puzzle_address}"
     try:
-        req = urllib.request.Request(url3, headers={"User-Agent": "ChiaPredict/0.1"})
+        req = urllib.request.Request(url3, headers={"User-Agent": "XCH Predict/0.1"})
         resp = urllib.request.urlopen(req, timeout=10)
         coin_data = json.loads(resp.read())
         print(f"  Result: {json.dumps(coin_data)[:500]}")

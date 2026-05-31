@@ -1,8 +1,8 @@
-# ChiaPredict Protocol Specification
+# XCH Predict Protocol Specification
 
 ## Overview
 
-ChiaPredict enables trustless binary prediction markets on the Chia blockchain. Markets resolve to YES or NO, with token holders of the winning outcome redeeming XCH.
+XCH Predict enables trustless binary prediction markets on the XCH blockchain. Markets resolve to YES or NO, with token holders of the winning outcome redeeming XCH.
 
 ## Actors
 
@@ -38,7 +38,7 @@ The oracle_payout puzzle is curried with:
 
 ### 2. Trading
 
-Standard Chia offer flow:
+Standard XCH offer flow:
 - Traders create offers: "I'll give 0.3 XCH for 1 YES token"
 - Offers posted to Dexie for aggregation
 - Any wallet can take offers (Sage, Goby, etc.)
@@ -87,7 +87,7 @@ c) XCH released to receiver_puzzle_hash
 - This is a Phase 2 enhancement
 
 ### Front-running
-- Chia has no public mempool — offers are either taken or not
+- XCH has no public mempool — offers are either taken or not
 - No MEV / sandwich attack vector
 - Significant advantage over EVM prediction markets
 
@@ -122,7 +122,7 @@ c) XCH released to receiver_puzzle_hash
 ## Fee Structure (Future)
 
 - Market creation: small XCH fee to prevent spam
-- Trading: standard Chia transaction fees only
+- Trading: standard XCH transaction fees only
 - Resolution: oracle pays fee to spend resolution tx
 - Redemption: winner pays fee to claim
 

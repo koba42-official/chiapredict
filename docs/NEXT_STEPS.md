@@ -1,4 +1,4 @@
-# ChiaPredict — Next Steps
+# XCH Predict — Next Steps
 
 ## Phase 1: Minimum Viable Market (2-3 weeks)
 
@@ -19,7 +19,7 @@ Script that does in one flow:
 ### 1.3 Offer-Based Trading
 - Create initial offers: YES at 0.5 XCH, NO at 0.5 XCH
 - Post to Dexie via their API
-- Users can take/create offers with any Chia wallet
+- Users can take/create offers with any XCH wallet
 - Monitor order book via Dexie API
 
 ### 1.4 Resolution + Redemption

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ChiaPredict — Clean E2E Mainnet Test (Round 2)
+XCH Predict — Clean E2E Mainnet Test (Round 2)
 
 Full lifecycle with proper state preservation:
   1. Compile puzzle (current AggSigMe version)
@@ -101,7 +101,7 @@ def step_compile_and_curry():
 
     # Generate deterministic test params
     print("\n[3] Generating market parameters...")
-    market_id = hashlib.sha256(b"chiapredict_round2_test_market").hexdigest()
+    market_id = hashlib.sha256(b"xchpredict_round2_test_market").hexdigest()
     yes_asset_id = hashlib.sha256(b"ROUND2_YES_TOKEN").hexdigest()
     no_asset_id = hashlib.sha256(b"ROUND2_NO_TOKEN").hexdigest()
     print(f"  Market ID:  {market_id}")
@@ -224,7 +224,7 @@ def step_find_coin(state):
     try:
         req = urllib.request.Request(url, data=body, headers={
             "Content-Type": "application/json",
-            "User-Agent": "ChiaPredict/0.1",
+            "User-Agent": "XCH Predict/0.1",
         })
         resp = urllib.request.urlopen(req, timeout=30)
         data = json.loads(resp.read())
@@ -401,7 +401,7 @@ def step_spend(state):
             data=push_body,
             headers={
                 "Content-Type": "application/json",
-                "User-Agent": "ChiaPredict/0.1",
+                "User-Agent": "XCH Predict/0.1",
             },
             method="POST",
         )

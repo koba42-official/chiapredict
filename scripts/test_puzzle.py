@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ChiaPredict — Test the oracle_payout puzzle on testnet.
+XCH Predict — Test the oracle_payout puzzle on testnet.
 
 Prerequisites:
   - Sage wallet running on testnet11 with TXCH balance
@@ -55,7 +55,7 @@ def compile_puzzle():
 
 def main():
     print("=" * 60)
-    print("ChiaPredict — Oracle Payout Puzzle Test")
+    print("XCH Predict — Oracle Payout Puzzle Test")
     print("=" * 60)
 
     # Step 1: Compile puzzle
